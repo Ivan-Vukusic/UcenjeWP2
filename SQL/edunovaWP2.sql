@@ -1,26 +1,15 @@
+
 use master;
-
 go
-
--- brisanje baze podataka
 drop database if exists edunovawp2;
-
 go
 
--- stvaranje baze podataka
 create database edunovawp2;
-
 go
-
--- promjena jezika
 alter database edunovawp2 collate Croatian_CI_AS;
-
 go
-
--- korištenje baze podataka
 use edunovawp2;
 
--- stvaranje tablica
 create table smjerovi(
 sifra int not null primary key identity(1,1),
 naziv varchar(60) not null,
@@ -60,29 +49,27 @@ email varchar(100) not null,
 brojugovora varchar(20)
 );
 
-
 create table clanovi(
 grupa int not null,
 polaznik int not null
 );
 
 -- vanjski ključevi
+alter table grupe add foreign key (smjer) references smjerovi(sifra);
+alter table grupe add foreign key (predavac) references predavaci(sifra);
+alter table clanovi add foreign key (grupa) references grupe(sifra);
+alter table clanovi add foreign key (polaznik) references polaznici(sifra);
 
-alter table grupe add foreign key (smjer) references smjerovi (sifra);
-alter table grupe add foreign key (predavac) references predavaci (sifra);
-alter table clanovi add foreign key (grupa) references grupe (sifra);
-alter table clanovi add foreign key (polaznik) references polaznici (sifra);
+
 
 -- Za početnike najbolja opcija
 -- Ova naredba je unijela jedan red u tablicu
-
 -- 1
 insert into smjerovi (naziv,brojsati,cijena,upisnina,verificiran)
 values ('Web programiranje',225,1325.85,null,1);
 
 -- minimalni unos
 -- primjer unosa više redova: 2
-
 insert into smjerovi (naziv) values
 -- 2
 ('Java programiranje'),
@@ -93,7 +80,8 @@ insert into predavaci (ime,prezime,email) values
 -- 1
 ('Tomislav','Jakopec','tjakopec@gmail.com'),
 -- 2
-('Shaquille','O''neal','shaki@gmail.com');
+('Shaquille', 'O''Neal','shaki@gmail.com');
+
 
 
 insert into polaznici (prezime,ime,email) values
@@ -129,19 +117,77 @@ insert into polaznici (prezime,ime,email) values
 ('Ćelić','Ivor','ivorcelic@gmail.com');
 
 
+
 insert into grupe (naziv,smjer,datumpocetka) values
 -- 1
 ('WP1',1,'2023-04-24 17:00:00'),
 -- 2
 ('WP2',1,'2023-10-30 17:00:00'),
---3
+-- 3
 ('JP28',2,'2023-04-24 19:00:00');
 
 
 insert into clanovi (grupa,polaznik) values
-(2,1),(2,2),(2,3),(2,4),(2,5),
-(2,6),(2,7),(2,8),(2,9),(2,10),
-(2,11),(2,12),(2,13),(2,14),(2,15),
-(2,16),(2,17),(2,18),(2,19),(2,20),
-(2,21),(2,22),(2,23),(2,24),(2,25),
-(2,26),(2,27),(2,28),(2,29),(2,30);
+(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),
+(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),
+(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),
+(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),
+(2,29),(2,30);
+
+-- UPDATE NAREDBA
+
+select * from polaznici;
+
+-- promjena jedne kolone (prezime)
+update polaznici set prezime='Kartik' where sifra=17;
+
+-- promjena tri kolone (prezime, oib, brojugovora)
+update polaznici set prezime='Šuler', oib='17657723151', brojugovora='25/2023'
+where sifra=17;
+
+select * from polaznici where sifra=17;
+
+select * from smjerovi;
+
+update smjerovi set cijena=1000 where sifra in (2,3);
+
+-- uvećanje svih cijena za 20%
+update smjerovi set cijena=cijena*1.2;
+
+-- umanjenje svih cijena za 20%
+update smjerovi set cijena=cijena*0.8;
+
+-- umanjenje svih cijena za 15
+update smjerovi set cijena=cijena-15;
+
+-- povećanje svih cijena za 15
+update smjerovi set cijena=cijena+15;
+
+select * from smjerovi;
+
+-- upisnine smjerova postaviti na 10% od cijene smjera
+update smjerovi set upisnina=cijena*0.1;
+
+-- promjena cijene Java programiranja na 1489.52
+update smjerovi set cijena=1489.52 where sifra=2;
+
+
+-- DELETE NAREDBA
+
+select * from smjerovi;
+
+-- unos novog smjera: Python programiranje
+insert into smjerovi (naziv) values ('Python programiranje');
+
+delete from smjerovi where sifra=4;
+
+-- neće obrisati niti jedan red jer je smjer VK u grupe
+delete from smjerovi;
+
+-- Obrišite sebe kao člana grupe WP2
+
+select * from clanovi;
+
+select * from polaznici;
+
+delete from clanovi where polaznik=21;

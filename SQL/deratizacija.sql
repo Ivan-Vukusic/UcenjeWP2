@@ -1,3 +1,6 @@
+use master;
+go
+drop database if exists deratizacija;
 --stvaranje baze podataka
 create database deratizacija;
 go
@@ -12,12 +15,14 @@ create table djelatnici(
 sifra int not null primary key identity (1,1),
 ime varchar(50) not null,
 prezime varchar(50) not null,
-brojmobitela int,
-oib char(11)
+brojmobitela varchar(20),
+oib char(11),
+struka varchar(50)
 );
 
 create table objekti(
 sifra int not null primary key identity (1,1),
+mjesto varchar(50) not null,
 adresa varchar(50) not null,
 namjena varchar(50)
 );
@@ -25,6 +30,8 @@ namjena varchar(50)
 create table otrovi(
 sifra int not null primary key identity (1,1),
 naziv varchar(50) not null,
+aktivnatvar varchar(50),
+djelovanje varchar(50),
 kolicina decimal(4,2),
 casbroj int
 );
@@ -34,7 +41,8 @@ sifra int not null primary key identity (1,1),
 datum datetime not null,
 djelatnik int not null,
 objekt int not null,
-otrov int not null
+otrov int not null,
+napomena varchar(200)
 );
 
 --vanjski ključevi
@@ -58,32 +66,36 @@ insert into djelatnici (ime,prezime) values
 
 --unos podataka u tablicu objekti
 
-insert into objekti (adresa) values
---1
-('Josipa Hutlera 12, Osijek'),
---2
-('Stjepana Radića 67, Osijek'),
---3
-('Trg bana Jelačića 9, Osijek'),
---4
-('Europska Avenija 15, Osijek');
+insert into objekti (mjesto,adresa) values
+-- 1
+('Osijek','Josipa Hutlera 12'),
+-- 2
+('Valpovo','Stjepana Radića 67'),
+-- 3
+('Petlovac','Trg bana Jelačića 9'),
+-- 4
+('Vinkovci','Europska Avenija 15');
 
 
 --unos podataka u tablicu otrovi
 
 insert into otrovi (naziv) values
---1
+-- 1
 ('Bromadiolon meki mamac'),
---2
+-- 2
 ('Brodilon parafinski blok'),
---3
-('Ratimor Brodifacum peleti');
+-- 3
+('Ratimor Brodifacum peleti'),
+-- 4
+('Ratron GL');
 
 
 --unos podataka u tablicu termin
 
 insert into termin (datum,djelatnik,objekt,otrov) values
-('2023-11-14',2,1,3),('2023-11-09',1,4,1),('2023-11-11',4,3,2),('2023-11-15',3,2,1);
-
+('2023-11-14',2,1,3),
+('2023-11-09',1,4,1),
+('2023-11-11',4,3,2),
+('2023-11-15',3,2,4);
 
 --za provjeru podataka koristi se naredba: select * from 
