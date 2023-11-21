@@ -1,6 +1,4 @@
-use master;
-go
-drop database if exists deratizacija;
+
 --stvaranje baze podataka
 create database deratizacija;
 go
@@ -24,21 +22,20 @@ create table objekti(
 sifra int not null primary key identity (1,1),
 mjesto varchar(50) not null,
 adresa varchar(50) not null,
-namjena varchar(50)
+vrsta varchar(50)
 );
 
 create table otrovi(
 sifra int not null primary key identity (1,1),
 naziv varchar(50) not null,
 aktivnatvar varchar(50),
-djelovanje varchar(50),
-kolicina decimal(4,2),
-casbroj int
+kolicina decimal(3,2),
+casbroj varchar(20)
 );
 
 create table termin(
 sifra int not null primary key identity (1,1),
-datum datetime not null,
+datum date not null,
 djelatnik int not null,
 objekt int not null,
 otrov int not null,
@@ -53,49 +50,50 @@ alter table termin add foreign key (otrov) references otrovi (sifra);
 
 --unos podataka u tablicu djelatnici
 
-insert into djelatnici (ime,prezime) values
---1
-('Marko','Potepuh'),
---2
-('Žorž','Kuruazije'),
---3
-('Stanimir','Horvat'),
---4
-('Benny','Hill');
+insert into djelatnici (ime,prezime,brojmobitela,oib,struka) values
+-- 1
+('Marko','Potepuh','095/659-3256',30953866267,'Sanitarni tehničar'),
+-- 2
+('Žorž','Kuruazije','096/753-7913',49438131275,'Veterinarski tehničar'),
+-- 3
+('Stanimir','Horvat','094/159-4862',26566935494,'Sanitarni inženjer'),
+-- 4
+('Benny','Hill','092/913-8247',12468790391,'Diplomirani sanitarni inženjer');
 
 
 --unos podataka u tablicu objekti
 
-insert into objekti (mjesto,adresa) values
+insert into objekti (mjesto,adresa,vrsta) values
 -- 1
-('Osijek','Josipa Hutlera 12'),
+('Osijek','Josipa Hutlera 12','Stambeni objekt'),
 -- 2
-('Valpovo','Stjepana Radića 67'),
+('Valpovo','Stjepana Radića 67','Objekt javne namjene'),
 -- 3
-('Petlovac','Trg bana Jelačića 9'),
+('Petlovac','Trg bana Jelačića 9','Zelena površina'),
 -- 4
-('Vinkovci','Europska Avenija 15');
+('Vinkovci','Europska Avenija 15','Park');
 
 
 --unos podataka u tablicu otrovi
 
-insert into otrovi (naziv) values
+insert into otrovi (naziv,aktivnatvar,kolicina,casbroj) values
 -- 1
-('Bromadiolon meki mamac'),
+('Brodilon meki mamac','Bromadiolon',0.4,'7654-82-6'),
 -- 2
-('Brodilon parafinski blok'),
+('Brodilon parafinski blok','Bromadiolon',0.5,'3467-76-7'),
 -- 3
-('Ratimor Brodifacum peleti'),
+('Ratimor Brodifacum peleti','Brodifacum',1.2,'3251-61-9'),
 -- 4
-('Ratron GL');
+('Ratron GL','Cinkov fosfid',0.3,'1864-37-5');
 
 
 --unos podataka u tablicu termin
 
 insert into termin (datum,djelatnik,objekt,otrov) values
 ('2023-11-14',2,1,3),
-('2023-11-09',1,4,1),
+('2023-11-09',1,4,2),
 ('2023-11-11',4,3,2),
 ('2023-11-15',3,2,4);
 
---za provjeru podataka koristi se naredba: select * from 
+
+
