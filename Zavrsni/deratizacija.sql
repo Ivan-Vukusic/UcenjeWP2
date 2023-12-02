@@ -1,4 +1,8 @@
 
+use master;
+go
+drop database if exists deratizacija;
+go
 --stvaranje baze podataka
 create database deratizacija;
 go
@@ -28,12 +32,12 @@ vrsta varchar(50)
 create table otrovi(
 sifra int not null primary key identity (1,1),
 naziv varchar(50) not null,
-aktivnatvar varchar(50),
+aktivnatvar varchar(50) not null,
 kolicina decimal(3,2),
-casbroj varchar(20)
+casbroj varchar(20) 
 );
 
-create table termin(
+create table termini(
 sifra int not null primary key identity (1,1),
 datum date not null,
 djelatnik int not null,
@@ -44,9 +48,9 @@ napomena varchar(200)
 
 --vanjski ključevi
 
-alter table termin add foreign key (djelatnik) references djelatnici (sifra);
-alter table termin add foreign key (objekt) references objekti (sifra);
-alter table termin add foreign key (otrov) references otrovi (sifra);
+alter table termini add foreign key (djelatnik) references djelatnici (sifra);
+alter table termini add foreign key (objekt) references objekti (sifra);
+alter table termini add foreign key (otrov) references otrovi (sifra);
 
 --unos podataka u tablicu djelatnici
 
@@ -89,11 +93,18 @@ insert into otrovi (naziv,aktivnatvar,kolicina,casbroj) values
 
 --unos podataka u tablicu termin
 
-insert into termin (datum,djelatnik,objekt,otrov) values
-('2023-11-14',2,1,3),
-('2023-11-09',1,4,2),
-('2023-11-11',4,3,2),
-('2023-11-15',3,2,4);
+insert into termini (datum,djelatnik,objekt,otrov,napomena) values
+('2023-11-14',2,1,3,'Podrum objekta uredan.'),
+('2023-11-09',1,4,2,'Primjećene aktivne rupe glodavaca. Tretirane i sanirane.'),
+('2023-11-11',4,3,2,'Primjećene aktivne rupe glodavaca. Tretirane i sanirane.'),
+('2023-11-15',3,2,4,'Glodavci viđeni oko objekta. Deratizacija provedena.');
 
 
+select a.datum, b.ime, b.prezime, 
+c.mjesto, c.adresa, d.naziv, d.kolicina, a.napomena
+from termini a inner join djelatnici b
+on a.djelatnik=b.sifra
+inner join objekti c on a.objekt=c.sifra
+inner join otrovi d on a.otrov=d.sifra;
 
+select * from termini;
