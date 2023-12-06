@@ -29,7 +29,7 @@ create table djelatnici(
 create table vrste(
 
 	sifra int not null primary key identity (1,1),
-	opis varchar(50) not null
+	naziv varchar(50) not null
 
 );
 
@@ -78,7 +78,7 @@ insert into djelatnici (ime,prezime,brojmobitela,oib,struka) values
 ('Benny','Hill','092/913-8247','12468790391','Diplomirani sanitarni inženjer');
 
 
-insert into vrste (opis) values
+insert into vrste (naziv) values
 
 ('Stambeni objekt'),
 
