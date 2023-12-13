@@ -29,5 +29,12 @@ namespace WebAPI.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet]
+        [Route("Hello")]
+        public String Helloworld(string Ime, int Godine, bool Aktivan)
+        {
+            return "Upisali ste " + Ime + " i imate " + Godine + " godina, " + Aktivan;
+        }
     }
 }
