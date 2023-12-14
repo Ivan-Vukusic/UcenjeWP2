@@ -54,4 +54,4 @@ float Sirina = float.Parse(Console.ReadLine());
 
 var Povrsina = Duzina * Sirina;
 
-Console.WriteLine("Površina prosotrije iznosi " + Povrsina + " metara kvadratnih");
+Console.WriteLine("Površina prostorije iznosi " + Povrsina + " metara kvadratnih");
