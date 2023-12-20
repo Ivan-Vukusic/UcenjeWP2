@@ -83,7 +83,7 @@
             Console.WriteLine(++t - --l); // 1 - 3
             Console.WriteLine("t={0},l={1}", t, l);
 
-            // Ovo vježbati doma  na način
+            // Ovo vježbati doma na način
             //Prvo si postaviti zadatak pa ga nakon 15 minuta riješiti
 
 
