@@ -37,12 +37,12 @@ namespace UcenjeCS
 
             // trodimenzionalni niz - kocka
 
-            int[,,] Kocka;
+            //int[,,] Kocka;
 
 
             // zvjezdane staze
 
-            int[,,,,,] ZvjezdaneStaze;
+            //int[,,,,,] ZvjezdaneStaze;
 
         }
     }

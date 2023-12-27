@@ -133,19 +133,19 @@ namespace UcenjeCS
             // Za uneseni broj između 1 i 10
             // ispiši taj broj na kvadrat
 
-            int broj;
+            //int broj;
 
-            for(; ; ) 
-            {
-                Console.Write("Unesi broj između 1 i 10: ");    
-                broj = int.Parse(Console.ReadLine());
-                if (broj >= 1 && broj <= 10) 
-                {
-                    break;
-                }
-                Console.WriteLine("Dragi korisniče, krivi unos!");
-            }
-            Console.WriteLine(broj*broj);
+            //for(; ; ) 
+            //{
+            //    Console.Write("Unesi broj između 1 i 10: ");    
+            //    broj = int.Parse(Console.ReadLine());
+            //    if (broj >= 1 && broj <= 10) 
+            //    {
+            //        break;
+            //    }
+            //    Console.WriteLine("Dragi korisniče, krivi unos!");
+            //}
+            //Console.WriteLine(broj*broj);
         }
     }
 }

@@ -43,11 +43,18 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet]
+        [Route("zad2dz")]
 
-
-
-
-
+        public int zbrojiBrojeve(int Broj) 
+        {
+            int suma = 0;
+            for (int i = 1; i <= Broj; i++)
+            {
+                suma = i * (i + 1) / 2;
+            }
+            return suma;
+        }
 
 
         
