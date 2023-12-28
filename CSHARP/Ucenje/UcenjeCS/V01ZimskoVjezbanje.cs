@@ -41,12 +41,6 @@ namespace UcenjeCS
             //Napisati program koji unosi brojeve sve dok ne unese broj veći od 100
             //a zatim ispisuje koliko je bilo pokušaja unosa
             
-
-
-
-
-
-
         }
     } 
 
