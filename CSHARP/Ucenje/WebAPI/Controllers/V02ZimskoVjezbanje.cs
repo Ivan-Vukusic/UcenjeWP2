@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -33,6 +33,38 @@ namespace WebAPI.Controllers
             return niz;
         }
 
+
+        [HttpGet]
+        [Route("Vjezba3")]
+
+        public int Vj3() 
+        {
+            int suma = 0;
+            for(int i = 2;  i <= 18; i++) 
+            {
+                if (i % 2 == 0)
+                {
+                    suma += i;
+                }
+            }
+
+            return suma;
+        }
+
+
+        [HttpGet]
+        [Route("Vjezba4")]
+
+        public int Vj4(int broj) 
+        {
+            int suma = 0;
+
+            for(int i = 0; i <= broj; i++) 
+            {
+                suma += i;
+            }
+            return suma;
+        }
 
     }
 }

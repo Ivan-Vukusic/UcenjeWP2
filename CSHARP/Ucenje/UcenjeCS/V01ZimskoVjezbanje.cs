@@ -1,4 +1,4 @@
-﻿
+
 using System.Diagnostics.Metrics;
 using System.Runtime.Intrinsics.X86;
 
