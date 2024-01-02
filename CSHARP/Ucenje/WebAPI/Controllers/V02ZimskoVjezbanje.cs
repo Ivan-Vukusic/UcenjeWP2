@@ -202,7 +202,81 @@ namespace WebAPI.Controllers
         [Route("Vjezba9")]
         public int Vj9(int x, int y) 
         {
-            return 0;
+            int a = 0;
+            int b = 0;
+
+            if (x < y)
+            {
+                a = x;
+                b = y;
+            }
+            else
+            {
+                a = y;
+                b = x;
+            }
+
+            int zb1 = 0;
+            int zb2 = 0;
+            int suma = 0;
+
+            for(int i = a; i <= b; i++) 
+            {
+                if (i % 3 == 0) 
+                {
+                    zb1 += i;
+                }
+
+                if(i % 5 == 0) 
+                {
+                    zb2 += i;
+                }
+            }
+            suma = zb1 + zb2;
+
+            return suma;
+        }
+
+
+
+        //Ruta prima dva parametra koji su cijeli brojevi i vraća dvodimenzionalni niz (matricu) koja sadrži tablicu množenja za dva primljena broja
+
+
+
+
+
+
+
+
+        //Ruta prima jedan parametar koji je cijeli broj i vraća niz cijelih brojeva koji su složeni od primljenog broja do broja 1
+        [HttpGet]
+        [Route("Vjezba11")]
+        public int[] Vj11(int x) 
+        {            
+            int[] niz = new int[x];
+            int n = 0;
+            
+            for (int i = x; i > 0; i--) 
+            {
+                niz[n++] = i;
+            }
+            return niz;
+        }
+
+
+        //Ruta prima cijeli broj i vraća logičku istinu ako je primljeni broj prosti (prim - prime) broj, odnosno logičku laž ako nije
+        [HttpGet]
+        [Route("Vjezba12")]
+        public bool Vj12(int x) 
+        {
+            for(int i = 2; i < x; i++) 
+            {                
+                if(x % i == 0) 
+                {
+                    return false;                    
+                }                
+            }
+            return true;
         }
     }
 }
