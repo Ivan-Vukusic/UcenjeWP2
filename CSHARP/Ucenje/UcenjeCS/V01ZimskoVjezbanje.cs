@@ -42,22 +42,43 @@ namespace UcenjeCS
             //Napisati program koji unosi brojeve sve dok ne unese broj veći od 100
             //a zatim ispisuje koliko je bilo pokušaja unosa
 
-            int count = 0;
+            //int count = 0;
 
-            Random broj = new Random();
+            //Random broj = new Random();
 
-            for (int i = 0; i < 150; i++) 
-            {
-                int n = broj.Next(1,150);                
-                if (n > 100) 
+            //for (int i = 0; i < 150; i++) 
+            //{
+            //    int n = broj.Next(1,150);                
+            //    if (n > 100) 
+            //    {
+            //        break;                    
+            //    }
+            //    count++;
+            //    Console.Write(n + " ");
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine("Broj ponavljanja je: " + count);
+
+
+
+            
+            
+                Console.Write("Unesi prvi broj: ");
+                int x = int.Parse(Console.ReadLine());
+                Console.Write("Unesi drugi broj: ");
+                int y = int.Parse(Console.ReadLine());
+
+                int[,] Tablica = new int[x, y];
+
+                for (int i = 1; i <= x; i++)
                 {
-                    break;                    
+                    for (int j = 1; j <= y; j++)
+                    {
+                        Console.Write((Tablica[i - 1, j - 1] = i * j) + "\t");
+                    }
+                    Console.WriteLine();
                 }
-                count++;
-                Console.Write(n + " ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("Broj ponavljanja je: " + count);
+            
 
         }
     } 
