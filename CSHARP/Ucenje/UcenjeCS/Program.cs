@@ -11,4 +11,6 @@ using UcenjeCS;
 
 //E05ForPetlja.Izvedi();
 
-V01ZimskoVjezbanje.Izvedi();
+//V01ZimskoVjezbanje.Izvedi();
+
+CiklicnaMatrica.Izvedi();
