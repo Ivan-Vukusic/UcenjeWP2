@@ -46,39 +46,18 @@ namespace UcenjeCS
 
             //Random broj = new Random();
 
-            //for (int i = 0; i < 150; i++) 
+            //for (; ; )
             //{
-            //    int n = broj.Next(1,150);                
-            //    if (n > 100) 
+            //    int n = broj.Next(1, 150);
+            //    if (n > 100)
             //    {
-            //        break;                    
+            //        break;
             //    }
             //    count++;
             //    Console.Write(n + " ");
             //}
             //Console.WriteLine();
-            //Console.WriteLine("Broj ponavljanja je: " + count);
-
-
-
-            
-            
-                Console.Write("Unesi prvi broj: ");
-                int x = int.Parse(Console.ReadLine());
-                Console.Write("Unesi drugi broj: ");
-                int y = int.Parse(Console.ReadLine());
-
-                int[,] Tablica = new int[x, y];
-
-                for (int i = 1; i <= x; i++)
-                {
-                    for (int j = 1; j <= y; j++)
-                    {
-                        Console.Write((Tablica[i - 1, j - 1] = i * j) + "\t");
-                    }
-                    Console.WriteLine();
-                }
-            
+            //Console.WriteLine("Broj ponavljanja je: " + count);           
 
         }
     } 
