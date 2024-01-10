@@ -238,18 +238,18 @@ namespace WebAPI.Controllers
             return suma;
         }
 
-        
+
         //Ruta prima dva parametra koji su cijeli brojevi i vraća dvodimenzionalni niz (matricu) koja sadrži tablicu množenja za dva primljena broja
         [HttpGet]
         [Route("Vjezba10")]
-        public int[] Vj10(int x, int y) 
+        public int[] Vj10(int x, int y)
         {
             int[] Tab1 = new int[x];
             int[] Tab2 = new int[y];
-                                    
-            for(int i = 1; i <= 10; i++) 
+
+            for (int i = 1; i <= 10; i++)
             {
-                Tab1[i] = (i + 1) * x;         
+                Tab1[i] = (i + 1) * x;
             }
 
             for (int i = 1; i <= 10; i++)
@@ -257,11 +257,11 @@ namespace WebAPI.Controllers
                 Tab2[i] = (i + 1) * y;
             }
 
-            int[,] Rezultat = new int[x,y];
+            int[,] Rezultat = new int[x, y];
 
             // riješiti spajanje nizova
 
-            return ;
+        return Tab1;
         }
             
             

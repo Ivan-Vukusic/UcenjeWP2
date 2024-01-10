@@ -41,7 +41,7 @@ namespace UcenjeCS
                 Matrica[i, St - 1] = Br++;
             }
 
-            
+            // definirati kretanje sa uvjetima
 
             Console.WriteLine();
             for (int i = 0; i < Rd; i++)
