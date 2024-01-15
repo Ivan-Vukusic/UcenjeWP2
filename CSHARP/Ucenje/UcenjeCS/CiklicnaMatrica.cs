@@ -18,30 +18,45 @@ namespace UcenjeCS
 
             int[,] Matrica = new int[Rd, St]; // definiranje matrice
 
-            int Br = 1; // brojač
+            int RdP = 0;      // početak reda
+            int RdK = St - 1; // kraj reda
+            int StP = 0;      // početak stupca
+            int StK = Rd - 1; // kraj stupca
             
+            int br = 1; // brojač
 
-            for (int i = 1; i <= St; i++) // lijevo
+            while (RdP <= RdK && StP <= StK)
             {
-                Matrica[Rd - 1, St - i] = Br++;
-            }
+                for (int i = RdK; i >= RdP; i--)
+                {
+                    Matrica[StK, i] = br++;
+                }
+                StK--;
 
-            for (int i = 2; i <= Rd; i++) // gore
-            {
-                Matrica[Rd - i, 0] = Br++;
-            }
+                for (int i = StK; i >= StP; i--)
+                {
+                    Matrica[i, RdP] = br++;
+                }
+                RdP++;
 
-            for (int i = 1; i < St; i++) // desno
-            {
-                Matrica[0, i] = Br++;
-            }
+                if (StP <= StK)
+                {
+                    for (int i = RdP; i <= RdK; i++)
+                    {
+                        Matrica[StP, i] = br++;
+                    }                    
+                }
+                StP++;
 
-            for (int i = 1; i < Rd - 1; i++) // dolje
-            {
-                Matrica[i, St - 1] = Br++;
-            }
-
-            // definirati kretanje sa uvjetima
+                if (RdP <= RdK)
+                {
+                    for (int i = StP; i <= StK; i++)
+                    {
+                        Matrica[i, RdK] = br++;
+                    }                    
+                }
+                RdK--;
+           }           
 
             Console.WriteLine();
             for (int i = 0; i < Rd; i++)
