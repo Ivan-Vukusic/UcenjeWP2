@@ -25,5 +25,11 @@ using UcenjeCS;
 
 //E09Metode.Izvedi();
 
-Console.WriteLine(Z01Metode.CijeliDioZbroja(3.4f,5.8f));
+//Console.WriteLine(Z01Metode.CijeliDioZbroja(3.4f,5.8f));
+
+//E10ObradaIznimki.Izvedi();
+
+//E11Rekurzija.Izvedi();
+
+Z02Vjezba.Izvedi();
 
