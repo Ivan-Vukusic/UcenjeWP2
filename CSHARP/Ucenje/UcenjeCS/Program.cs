@@ -31,5 +31,7 @@ using UcenjeCS;
 
 //E11Rekurzija.Izvedi();
 
-Z02Vjezba.Izvedi();
+//Z02Vjezba.Izvedi();
+
+UcenjeCS.E12KlasaObjekt.Program.Izvedi();
 
