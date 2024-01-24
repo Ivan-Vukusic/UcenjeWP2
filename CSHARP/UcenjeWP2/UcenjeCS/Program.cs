@@ -33,5 +33,5 @@ using UcenjeCS;
 
 //Z02Vjezba.Izvedi();
 
-UcenjeCS.E12KlasaObjekt.Program.Izvedi();
+//UcenjeCS.E12KlasaObjekt.Program.Izvedi();
 

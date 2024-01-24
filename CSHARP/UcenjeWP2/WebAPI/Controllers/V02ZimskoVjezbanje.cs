@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.JavaScript;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
@@ -242,26 +243,23 @@ namespace WebAPI.Controllers
         //Ruta prima dva parametra koji su cijeli brojevi i vraća dvodimenzionalni niz (matricu) koja sadrži tablicu množenja za dva primljena broja
         [HttpGet]
         [Route("Vjezba10")]
-        public int[] Vj10(int x, int y)
+        public string Vj10(int x, int y)
         {
-            int[] Tab1 = new int[x];
-            int[] Tab2 = new int[y];
+            int[,] Tab = new int[x,y];
 
-            for (int i = 1; i <= 10; i++)
+            StringBuilder Rez = new StringBuilder();           
+
+            for (int i = 1; i <= x; i++)
             {
-                Tab1[i] = (i + 1) * x;
+                for(int j = 1; j <= y; j++)
+                {
+                    Tab[i - 1, j - 1] = i * j;
+                    Rez.Append(Tab[i - 1, j - 1] + "\t");
+                }
+                Rez.AppendLine();
             }
-
-            for (int i = 1; i <= 10; i++)
-            {
-                Tab2[i] = (i + 1) * y;
-            }
-
-            int[,] Rezultat = new int[x, y];
-
-            // riješiti spajanje nizova
-
-        return Tab1;
+            
+            return Rez.ToString();
         }
             
             
