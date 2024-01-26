@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     {
         //prima tri parametra: dva cijela broja i string. String može biti + - * i /. Ruta vraća rezultat
         [HttpGet]
-        [Route("Vjezba1")]
+        [Route("Vježba1")]
         public float V1(int X, int Y, string Radnja) 
         {
             switch (Radnja) 

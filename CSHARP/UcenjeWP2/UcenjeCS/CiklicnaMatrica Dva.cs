@@ -8,55 +8,57 @@ namespace UcenjeCS
 {
     internal class CiklicnaMatricaDva
     {
-        public static void Izvedi() // Ciklična matrica - kretanje u smjeru kazaljke - kretanje dolje desno
+        public static void Izvedi()
         {
-            Console.Write("Unesi broj redova: "); // upis broja redova
+            Console.Write("Unesi broj redova: ");
             int Red = int.Parse(Console.ReadLine());
 
-            Console.Write("Unesi broj stupaca: "); // upis broja stupaca
+            Console.Write("Unesi broj stupaca: ");
             int Stupac = int.Parse(Console.ReadLine());
 
-            int[,] Matrica = new int[Red, Stupac]; // definiranje matrice
-                                    
-            int Br = 1; // brojač
+            int[,] Matrica = new int[Red, Stupac];
+            
+            
+            int Brojac = 1;
 
-            int Lijevo = Stupac - 1;
-            int Gore = 0;
-            int Desno = 0;
-            int Dolje = Red - 1;
+            int vrh = 0;
+            int dno = Red - 1;
+            int lijevo = 0;
+            int desno = Stupac - 1;
 
-            //for (int Vp = 1; Vp < Stupac && Vp < Red; Vp++)
-            //{
-                
-                    for (int i = 1; i <= Stupac; i++) // lijevo
+            for (; Brojac <= Red * Stupac;)
+            {
+                for (int i = desno; i >= lijevo; i--)
                     {
-                        Matrica[Lijevo, Stupac - i] = Br++;
+                        Matrica[dno, i] = Brojac++;
                     }
-                    //Vp++;
+                dno--;
 
-                    for (int i = 2; i <= Red; i++) // gore
+                for (int i = dno; i >= vrh; i--)
                     {
-                        Matrica[Red - i, Gore] = Br++;
+                        Matrica[i, lijevo] = Brojac++;
                     }
+                lijevo++;
 
-
-                    for (int i = 1; i < Stupac; i++) // desno
+                if (Brojac <= Red * Stupac)
+                {
+                    for (int i = lijevo; i <= desno; i++)
                     {
-                        Matrica[Desno, i] = Br++;
+                        Matrica[vrh, i] = Brojac++;
                     }
+                }
+                vrh++;
 
-
-                    for (int i = 1; i < Red - 1; i++) // dolje
+                if (Brojac <= Red * Stupac)
+                {
+                    for (int i = vrh; i <= dno; i++)
                     {
-                        Matrica[i, Dolje] = Br++;
+                        Matrica[i, desno] = Brojac++;
                     }
-                    Lijevo--;
-                    Gore++;
-                    Desno++;
-                    Dolje--;
-                
-            //}
-
+                }
+                desno--;
+            }
+                        
             Console.WriteLine();
             for (int i = 0; i < Red; i++)
             {
@@ -66,8 +68,6 @@ namespace UcenjeCS
                 }
                 Console.WriteLine();
             }
-
-
         }
     }
 }
