@@ -39,5 +39,5 @@ using UcenjeCS;
 
 //UcenjeCS.E14Polimorfizam.Program.Izvedi();
 
-//new UcenjeCS.E15KonzolnaAplikacija.Program();
+new UcenjeCS.E15KonzolnaAplikacija.Program();
 
