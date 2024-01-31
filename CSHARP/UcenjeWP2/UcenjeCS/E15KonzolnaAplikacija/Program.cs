@@ -30,8 +30,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         }
 
         private void OdabirStavkePocetnogIzbornika()
-        {
-            //var Izbor = Pomocno.UcitajInt("Unesi izbor: ");
+        {            
             switch (Pomocno.UcitajInt("Unesi izbor: "))
             {
                 case 1:
@@ -57,13 +56,12 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
         }
 
-
         private void IzbornikRadSaSmjerovima()
         {
             Console.WriteLine("1. Prikaži sve smjerove");
             Console.WriteLine("2. Dodaj smjer");
             Console.WriteLine("3. Uredi smjer");
-            Console.WriteLine("4. Izbriši smjer");
+            Console.WriteLine("4. Obriši smjer");
             Console.WriteLine("5. Povratak u glavni izbornik");
             OdabirStavkeIzbornikaSmjerova();
         }
@@ -71,7 +69,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         private void PozdravnaPoruka()
         {
             Console.WriteLine("**********************************");
-            Console.WriteLine("* EDUNOVA KONZOLNA APLIKACIJA V1 *");
+            Console.WriteLine("* EDUNOVA KONZOLNA APLIKACIJA v1 *");
             Console.WriteLine("**********************************");
         }
 
@@ -131,14 +129,13 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                 Console.WriteLine(++i + ". " + s); });
             Console.WriteLine("******************");
         }
-
         private void DodajNoviSmjer()
         {
             Smjerovi.Add(new Smjer()
             {
                 Sifra = Pomocno.UcitajInt("Unesi širu smjera: "),
                 Naziv = Pomocno.UcitajString("Unesi naziv smjera: "),
-                // učitati ostale vrijednosti
+                
             });
 
             IzbornikRadSaSmjerovima();

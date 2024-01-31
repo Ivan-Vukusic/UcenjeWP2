@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UcenjeCS.E15KonzolnaAplikacija.Model
 {
-    internal class Smjer:Entitet
+    internal class Smjer : Entitet
     {
         public string Naziv { get; set; }
         public int BrojSati { get; set; }
