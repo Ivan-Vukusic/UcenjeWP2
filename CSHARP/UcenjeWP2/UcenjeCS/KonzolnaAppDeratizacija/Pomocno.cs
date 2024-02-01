@@ -8,28 +8,23 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
 {
     internal class Pomocno
     {
-        public static int UcitajBrojRaspon(string poruka, string greska, int poc, int kraj)
+        public static int UcitajInt(string Poruka)
         {
-            int b;
-            while (true)
+            for (; ; )
             {
-                Console.Write(poruka);
+                Console.Write(Poruka);
                 try
                 {
-                    b = int.Parse(Console.ReadLine());
-                    if (b >= poc && b <= kraj)
-                    {
-                        return b;
-                    }
-                    Console.WriteLine(greska);
+                    return int.Parse(Console.ReadLine());
                 }
-                catch (Exception ex)
+                catch
                 {
-                    Console.WriteLine(greska);
+                    Console.WriteLine("Neispravan unos");
                 }
+
             }
         }
-        internal static string UcitajString(string poruka, string greska)
+        internal static string UcitajString(string poruka)
         {
             string s;
             while (true)
@@ -40,7 +35,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 {
                     return s;
                 }
-                Console.WriteLine(greska);
+                
             }
         }
         internal static int UcitajCijeliBroj(string poruka, string greska)
@@ -85,18 +80,18 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 }
             }
         }
-        internal static DateTime UcitajDatum(string v1, string v2)
+        internal static DateTime UcitajDatum(string poruka, string greska)
         {
             while (true)
             {
                 try
                 {
-                    Console.WriteLine(v1);
+                    Console.WriteLine(poruka);
                     return DateTime.Parse(Console.ReadLine());
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(v2);
+                    Console.WriteLine(greska);
                 }
             }
         }
