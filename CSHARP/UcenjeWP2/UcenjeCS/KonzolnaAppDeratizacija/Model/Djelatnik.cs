@@ -13,5 +13,10 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
         public string BrojMobitela { get; set; }
         public string Oib { get; set; }
         public string Struka { get; set; }
+
+        public override string ToString()
+        {
+            return Ime + " " + Prezime;
+        }
     }
 }

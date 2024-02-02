@@ -12,5 +12,10 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
         public string AktivnaTvar { get; set; }
         public decimal Kolicina { get; set; }
         public string CasBroj { get; set; }
+
+        public override string ToString()
+        {
+            return Naziv;
+        }
     }
 }

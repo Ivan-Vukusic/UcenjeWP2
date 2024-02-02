@@ -13,5 +13,10 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
         public Objekt Objekt { get; set; }
         public Otrov Otrov { get; set; }
         public string Napomena { get; set; }
+
+        public override string ToString()
+        {
+            return Napomena;
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
     internal class Vrsta : Entitet
     {
         public string Naziv { get; set; }
+
+        public override string ToString()
+        {
+            return Naziv;
+        }
     }
 }
