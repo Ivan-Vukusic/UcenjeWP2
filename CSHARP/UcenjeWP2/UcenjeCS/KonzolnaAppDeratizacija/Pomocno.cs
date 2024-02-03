@@ -38,7 +38,8 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 
             }
         }
-        internal static int UcitajCijeliBroj(string poruka, string greska)
+
+        public static int UcitajBrojRaspon(string poruka, string greska, int poc, int kraj)
         {
             int b;
             while (true)
@@ -47,7 +48,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 try
                 {
                     b = int.Parse(Console.ReadLine());
-                    if (b > 0)
+                    if (b >= poc && b <= kraj)
                     {
                         return b;
                     }
@@ -59,6 +60,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 }
             }
         }
+
         internal static decimal UcitajDecimalniBroj(string poruka, string greska)
         {
             decimal b;
@@ -94,6 +96,12 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                     Console.WriteLine(greska);
                 }
             }
+        }
+
+        internal static bool UcitajBool(string poruka)
+        {
+            Console.Write(poruka);
+            return Console.ReadLine().Trim().ToLower().Equals("da") ? true : false;
         }
 
     }

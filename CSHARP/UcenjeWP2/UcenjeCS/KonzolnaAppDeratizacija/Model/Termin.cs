@@ -9,14 +9,9 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
     internal class Termin : Entitet
     {
         public DateTime Datum { get; set; }
-        public Djelatnik Djelatnik { get; set; }
-        public Objekt Objekt { get; set; }
-        public Otrov Otrov { get; set; }
+        public List <Djelatnik> Djelatnici { get; set; }
+        public List <Objekt> Objekti { get; set; }
+        public List <Otrov> Otrovi { get; set; }
         public string Napomena { get; set; }
-
-        public override string ToString()
-        {
-            return Napomena;
         }
-    }
 }

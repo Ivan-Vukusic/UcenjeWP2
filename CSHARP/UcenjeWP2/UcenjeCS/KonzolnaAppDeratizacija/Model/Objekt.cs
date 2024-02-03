@@ -10,11 +10,6 @@ namespace UcenjeCS.KonzolnaAppDeratizacija.Model
     {
         public string Mjesto { get; set; }
         public string Adresa { get; set; }
-        public Vrsta Vrsta { get; set; }
-
-        public override string ToString()
-        {
-            return Adresa;
-        }
+        public  List <Vrsta> Vrste { get; set; }        
     }
 }
