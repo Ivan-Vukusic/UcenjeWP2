@@ -12,6 +12,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija.Model
         public string Prezime { get; set; }
         public string Oib { get; set; }
         public string Email { get; set; }
+        public string BrojUgovora { get; set; }
 
         public override string ToString()
         {

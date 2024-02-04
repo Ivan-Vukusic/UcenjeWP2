@@ -41,6 +41,33 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
         }
 
+        internal static float ucitajDecimalniBroj(string poruka, string greska)
+        {
+            float b;
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = float.Parse(Console.ReadLine());
+                    if (b > 0)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine(greska);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(greska);
+                }
+            }
+        }
+
+        internal static bool ucitajBool(string poruka)
+        {
+            Console.Write(poruka);
+            return Console.ReadLine().Trim().ToLower().Equals("da") ? true : false;
+        }
 
     }
 }

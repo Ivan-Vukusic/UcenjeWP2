@@ -47,7 +47,6 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             Console.WriteLine("6. Izlaz iz programa");
             Console.WriteLine();
             OdabirStavkeGlavnogIzbornika();
-
         }
 
         private void OdabirStavkeGlavnogIzbornika()
@@ -161,65 +160,53 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
 
         private void DodajTermin()
         {
-
-            var t = new Termin();
-            t.Sifra = Pomocno.UcitajInt("Unesi šifru termina: ");
-            t.Datum = Pomocno.UcitajDatum("Unesi datum termina(format dd.mm.yyyy.): ", "Greška");
-            t.Djelatnici = PostaviDjelatnika();
-            t.Otrovi = PostaviOtrov();
-            t.Objekti = PostaviObjekt();
-            t.Napomena = Pomocno.UcitajString("Dodaj napomenu: ");
-            Termini.Add(t);            
+            Termini.Add(new Termin()
+            {                
+                Sifra = Pomocno.UcitajInt("Unesi šifru termina: "),
+                Datum = Pomocno.UcitajDatum("Unesi datum termina(format dd.mm.yyyy.): ", "Greška"),
+                Djelatnici = PostaviDjelatnike(),
+                Otrovi = PostaviOtrove(),
+                Objekti = PostaviObjekte(),
+                Napomena = Pomocno.UcitajString("Dodaj napomenu: ")
+            });            
         }
-
-        private Objekt PostaviObjekt()
-        {
-            PrikaziObjekte();
-            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj objekta: ", "Nije dobar odabir", 1, Objekti.Count());
-            return Objekti[Index - 1];
-        }
-
-        private Otrov PostaviOtrov()
-        {
-            PrikaziOtrove();
-            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj otrova: ", "Nije dobar odabir", 1, Otrovi.Count());
-            return Otrovi[Index - 1];
-        }
-
-        private List <Djelatnik> PostaviDjelatnike()
-        {
-            List <Djelatnik> djelatnici = new List <Djelatnik>();
-            while (Pomocno.UcitajBool("Želite li dodati djelatnike? (da ili bilo što drugo za ne): "))
-            {
-                djelatnici.Add(PostaviDjelatnika());
-            }
-            return djelatnici;
-        }
-
-        private Djelatnik PostaviDjelatnika()
-        {
-            PrikaziDjelatnike();
-            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj djelatnika: ", "Nije dobar odabir", 1, Djelatnici.Count());
-            return Djelatnici[Index - 1];
-        }
-
+        
         private void UrediTermin()
         {
             PrikaziTermine();
             int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj termina: ", "Nije dobar odabir", 1, Termini.Count());
             var t = Termini[Index - 1];
             t.Sifra = Pomocno.UcitajInt(t.Sifra + ", Unesi novu šifru: ");
+            Console.WriteLine("==========");
             t.Datum = Pomocno.UcitajDatum(t.Datum + ", Unesi novi datum: ", "Greška");
-            t.Djelatnici = PostaviDjelatnika();
+            Console.WriteLine("==========");
+            t.Djelatnici = PostaviDjelatnike();
+            
             int b = 1;
+            
             foreach (Djelatnik djelatnik in t.Djelatnici)
             {
                 Console.WriteLine("{0}. {1}", b++, djelatnik);
             }
             Console.WriteLine("==========");
-            t.Djelatnici = PostaviDjelatnika;
-            t.Otrovi = PostaviOtrov();
-            t.Objekti = PostaviObjekt();
+            
+            t.Otrovi = PostaviOtrove();
+
+            int d = 1;
+            foreach (Otrov otrov in t.Otrovi)
+            {
+                Console.WriteLine("{0}. {1}", d++, otrov);
+            }
+            Console.WriteLine("==========");
+
+            t.Objekti = PostaviObjekte();
+            
+            int c = 1;
+            foreach(Objekt objekt in t.Objekti)
+            {
+                Console.WriteLine("{0}. {1}", c++, objekt);
+            }
+            Console.WriteLine("==========");
             Console.WriteLine();
             IzbornikTermini();
         }
@@ -342,6 +329,24 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             IzbornikDjelatnici();
         }
 
+        private List<Djelatnik> PostaviDjelatnike()
+        {
+            List<Djelatnik> djelatnici = new List<Djelatnik>();
+            while (Pomocno.UcitajBool("Želite li dodati djelatnike? (da ili bilo što drugo za ne): "))
+            {
+                djelatnici.Add(PostaviDjelatnika());
+            }
+            return djelatnici;
+        }
+
+        private Djelatnik PostaviDjelatnika()
+        {
+            PrikaziDjelatnike();
+            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj djelatnika: ", "Nije dobar odabir", 1, Djelatnici.Count());
+            return Djelatnici[Index - 1];
+        }
+
+
         // Izbornik otrova
 
         private void IzbornikOtrovi()
@@ -450,6 +455,23 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             IzbornikOtrovi();
         }
 
+        private List<Otrov> PostaviOtrove()
+        {
+            List<Otrov> otrovi = new List<Otrov>();
+            while (Pomocno.UcitajBool("Želite li dodati objekte? (da ili bilo što drugo za ne): "))
+            {
+                otrovi.Add(PostaviOtrov());
+            }
+            return otrovi;
+        }
+
+        private Otrov PostaviOtrov()
+        {
+            PrikaziOtrove();
+            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj otrova: ", "Nije dobar odabir", 1, Otrovi.Count());
+            return Otrovi[Index - 1];
+        }
+
         // Izbornik objekti
 
         private void IzbornikObjekti()
@@ -510,7 +532,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             Console.WriteLine("Objekti");
             Console.WriteLine();
             var i = 0;
-            Otrovi.ForEach(ob =>
+            Objekti.ForEach(ob =>
             {
                 Console.WriteLine(++i + "." + ob);
             });
@@ -529,21 +551,12 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 Sifra = Pomocno.UcitajInt("Unesi šifru objekta: "),
                 Mjesto = Pomocno.UcitajString("Unesi naziv mjesta: "),
                 Adresa = Pomocno.UcitajString("Unesi adresu objekta: "),
-                Vrsta = PostaviVrstu()
+                Vrste = PostaviVrsteObjekata()
             });
             Console.WriteLine();
             IzbornikObjekti();
         }
-
-        private Vrsta PostaviVrstu()
-        {
-
-            PrikaziVrsteObjekata();
-            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj vrste objekta: ", "Nije dobar odabir", 1, Vrste.Count());
-            return Vrste[Index - 1];
-
-        }
-
+        
         private void UrediObjekt()
         {
             PrikaziObjekte();
@@ -551,7 +564,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             ob.Sifra = Pomocno.UcitajInt(ob.Sifra + ", Unesi novu šifru: ");
             ob.Mjesto = Pomocno.UcitajString(ob.Mjesto + ", Unesi novo mjesto: ");
             ob.Adresa = Pomocno.UcitajString(ob.Adresa + ", Unesi novu adresu: ");
-            ob.Vrsta = PostaviVrstu();
+            ob.Vrste = PostaviVrsteObjekata();
             Console.WriteLine();
             IzbornikObjekti();
         }
@@ -562,6 +575,23 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             Objekti.RemoveAt(Pomocno.UcitajInt("Odaberi objekt za brisanje") - 1);
             Console.WriteLine();
             IzbornikObjekti();
+        }
+
+        private List<Objekt> PostaviObjekte()
+        {
+            List<Objekt> objekti = new List<Objekt>();
+            while (Pomocno.UcitajBool("Želite li dodati objekte? (da ili bilo što drugo za ne): "))
+            {
+                objekti.Add(PostaviObjekt());
+            }
+            return objekti;
+        }
+
+        private Objekt PostaviObjekt()
+        {
+            PrikaziObjekte();
+            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj objekta: ", "Nije dobar odabir", 1, Objekti.Count());
+            return Objekti[Index - 1];
         }
 
         // Izbornik vrsta
@@ -623,10 +653,10 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             Console.WriteLine("Vrste objekata");
             Console.WriteLine();
             var i = 0;
-            foreach (Vrsta vrsta in Vrste)
+            Vrste.ForEach(v =>
             {
-                Console.WriteLine("{0}. {1}", i++, vrsta.Naziv);
-            }
+                Console.WriteLine(++i + "." + v);
+            });
 
             if (Vrste.Count == 0)
             {
@@ -663,5 +693,25 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
             Console.WriteLine();
             IzbornikVrsteObjekata();
         }
+
+        private List<Vrsta> PostaviVrsteObjekata()
+        {
+            List<Vrsta> vrste = new List<Vrsta>();
+            while (Pomocno.UcitajBool("Želite li dodati vrste objekata? (da ili bilo što drugo za ne): "))
+            {
+                vrste.Add(PostaviVrstu());
+            }
+            return vrste;
+        }
+
+        private Vrsta PostaviVrstu()
+        {
+
+            PrikaziVrsteObjekata();
+            int Index = Pomocno.UcitajBrojRaspon("Odaberi redni broj vrste objekta: ", "Nije dobar odabir", 1, Vrste.Count());
+            return Vrste[Index - 1];
+
+        }
+
     }
 }

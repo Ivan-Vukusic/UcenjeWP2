@@ -18,6 +18,13 @@ namespace UcenjeCS.E15KonzolnaAplikacija
 
         }
 
+        private void PozdravnaPoruka()
+        {
+            Console.WriteLine("**********************************");
+            Console.WriteLine("* EDUNOVA KONZOLNA APLIKACIJA v1 *");
+            Console.WriteLine("**********************************");
+        }
+
         private void Izbornik()
         {
             Console.WriteLine("Izbornik");
@@ -38,13 +45,13 @@ namespace UcenjeCS.E15KonzolnaAplikacija
                     IzbornikRadSaSmjerovima();
                     break;
                 case 2:
-                    Console.WriteLine("Odabrali ste rad sa predavačima");
+                    Console.WriteLine("Rad sa predavačima");
                     break;
                 case 3:
-                    Console.WriteLine("Odabrali ste rad s polaznicima");
+                    Console.WriteLine("Rad s polaznicima");
                     break;
                 case 4:
-                    Console.WriteLine("Odabrali ste rad s grupama");
+                    Console.WriteLine("Rad s grupama");
                     break;
                 case 5:
                     Console.WriteLine("Izlaz iz programa");
@@ -65,14 +72,7 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             Console.WriteLine("5. Povratak u glavni izbornik");
             OdabirStavkeIzbornikaSmjerova();
         }
-
-        private void PozdravnaPoruka()
-        {
-            Console.WriteLine("**********************************");
-            Console.WriteLine("* EDUNOVA KONZOLNA APLIKACIJA v1 *");
-            Console.WriteLine("**********************************");
-        }
-
+        
         private void OdabirStavkeIzbornikaSmjerova()
         {
             switch (Pomocno.UcitajInt("Odaberi stavku izbornika: "))
@@ -105,10 +105,26 @@ namespace UcenjeCS.E15KonzolnaAplikacija
             }
         }
 
-        private void IzbrisiSmjer()
+        private void PrikaziSmjerove()
         {
-            PrikaziSmjerove();
-            Smjerovi.RemoveAt(Pomocno.UcitajInt("Odaberi smjer za brisanje: ") - 1);
+            var i = 0;
+            Smjerovi.ForEach(s => {
+                Console.WriteLine(++i + ". " + s);
+            });
+            Console.WriteLine("******************");
+        }
+
+        private void DodajNoviSmjer()
+        {
+            Smjerovi.Add(new Smjer()
+            {
+                Sifra = Pomocno.UcitajInt("Unesi širu smjera: "),
+                Naziv = Pomocno.UcitajString("Unesi naziv smjera: "),
+                BrojSati = Pomocno.UcitajInt("Unesi broj sati: "),
+                Cijena = Pomocno.ucitajDecimalniBroj("Unesi cijenu smjera (. za decimalni dio): ", "Unos mora biti pozitivan broj"),
+                Upisnina = Pomocno.ucitajDecimalniBroj("Unesi cijenu upisnine (. za decimalni dio: )", "Unos mora biti pozitivan broj"),
+                Verificiran = Pomocno.ucitajBool("Je li smjer vreificiran (da ili nešto drugo za ne): ")
+            });
             IzbornikRadSaSmjerovima();
         }
 
@@ -116,28 +132,19 @@ namespace UcenjeCS.E15KonzolnaAplikacija
         {
             PrikaziSmjerove();
             var s = Smjerovi[Pomocno.UcitajInt("Odaberi smjer za promjenu: ") - 1];
-            s.Sifra = Pomocno.UcitajInt(s.Sifra + ", Unesi promjenjenu šifru: ");
-            s.Naziv = Pomocno.UcitajString(s.Naziv + ", Unesi promjenjeni naziv: ");
-            // promjeniti ostale vrijednosti
+            s.Sifra = Pomocno.UcitajInt(s.Sifra + ", Unesi novu šifru: ");
+            s.Naziv = Pomocno.UcitajString(s.Naziv + ", Unesi novi naziv: ");
+            s.BrojSati = Pomocno.UcitajInt(s.BrojSati + ", Unesi novi broj sati: ");
+            s.Cijena = Pomocno.ucitajDecimalniBroj(s.Cijena + ", Unesi novu cijenu:", "Unos mora biti pozitivan broj");
+            s.Upisnina = Pomocno.ucitajDecimalniBroj(s.Upisnina + ", Unesi novu cijenu: ", "Unos mora biti pozitivan broj");
+            s.Verificiran = Pomocno.ucitajBool(s.Verificiran + ", Unesi novi status verifikacije: ");
             IzbornikRadSaSmjerovima();
-        }
+        }        
 
-        private void PrikaziSmjerove()
+        private void IzbrisiSmjer()
         {
-            var i = 0;
-            Smjerovi.ForEach(s => { 
-                Console.WriteLine(++i + ". " + s); });
-            Console.WriteLine("******************");
-        }
-        private void DodajNoviSmjer()
-        {
-            Smjerovi.Add(new Smjer()
-            {
-                Sifra = Pomocno.UcitajInt("Unesi širu smjera: "),
-                Naziv = Pomocno.UcitajString("Unesi naziv smjera: "),
-                
-            });
-
+            PrikaziSmjerove();
+            Smjerovi.RemoveAt(Pomocno.UcitajInt("Odaberi smjer za brisanje: ") - 1);
             IzbornikRadSaSmjerovima();
         }
     }
