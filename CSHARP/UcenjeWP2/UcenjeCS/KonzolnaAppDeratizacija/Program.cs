@@ -9,19 +9,19 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
 {
     internal class Program
     {
-        private List<Termin> Termini;
+        private List<Vrsta> Vrste;
         private List<Djelatnik> Djelatnici;
         private List<Otrov> Otrovi;
-        private List<Objekt> Objekti;
-        private List<Vrsta> Vrste;
+        private List<Objekt> Objekti;        
+        private List<Termin> Termini;
 
         public Program()
         {
-            Termini = new List<Termin>();
+            Vrste = new List<Vrsta>();            
             Djelatnici = new List<Djelatnik>();
             Otrovi = new List<Otrov>();
             Objekti = new List<Objekt>();
-            Vrste = new List<Vrsta>();
+            Termini = new List<Termin>();
             Naslov();
             Izbornik();
         }
@@ -168,7 +168,9 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
                 Otrovi = PostaviOtrove(),
                 Objekti = PostaviObjekte(),
                 Napomena = Pomocno.UcitajString("Dodaj napomenu: ")
-            });            
+            });
+            Console.WriteLine();
+            IzbornikTermini();
         }
         
         private void UrediTermin()
@@ -458,7 +460,7 @@ namespace UcenjeCS.KonzolnaAppDeratizacija
         private List<Otrov> PostaviOtrove()
         {
             List<Otrov> otrovi = new List<Otrov>();
-            while (Pomocno.UcitajBool("Želite li dodati objekte? (da ili bilo što drugo za ne): "))
+            while (Pomocno.UcitajBool("Želite li dodati otrove? (da ili bilo što drugo za ne): "))
             {
                 otrovi.Add(PostaviOtrov());
             }
