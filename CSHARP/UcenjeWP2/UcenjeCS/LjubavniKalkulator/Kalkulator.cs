@@ -10,7 +10,7 @@ namespace UcenjeCS.LjubavniKalkulator
     {
         public string PrvoIme { get; set; }
         public string DrugoIme { get; set; }
-                
+
         public Kalkulator(string prvoIme, string drugoIme)
         {
             PrvoIme = prvoIme.Trim().ToLower();
@@ -24,19 +24,17 @@ namespace UcenjeCS.LjubavniKalkulator
 
         private int[] SlovaUNiz(string Imena)
         {
-            string SpajanjeImena = PrvoIme + DrugoIme; 
+            char[] NizZnakova = Imena.ToCharArray();
 
-            char[] NizZnakova = SpajanjeImena.ToCharArray(); 
-
-            int[] NizBrojeva = new int[NizZnakova.Length]; 
+            int[] NizBrojeva = new int[NizZnakova.Length];
 
             int index = 0;
             int broj;
 
-            foreach(char c in NizZnakova) 
+            foreach (char c in NizZnakova)
             {
                 broj = 0;
-                foreach(char cc in NizZnakova) 
+                foreach (char cc in NizZnakova)
                 {
                     if (c == cc)
                     {
@@ -46,7 +44,7 @@ namespace UcenjeCS.LjubavniKalkulator
                 NizBrojeva[index++] = broj;
             }
 
-            foreach(int b in NizBrojeva)
+            foreach (int b in NizBrojeva)
             {
                 Console.Write(b);
             }
@@ -55,12 +53,48 @@ namespace UcenjeCS.LjubavniKalkulator
             return NizBrojeva;
         }
 
-        private int Izracunaj(int[] Brojevi)
+        private int Izracunaj(int[] NizBrojeva)
         {
-            
-                       
+            int Gotovo = 0;
+            int[] DrugiNiz;
 
-            return 0;            
+            if (NizBrojeva.Length % 2 == 0)
+            {
+                DrugiNiz = new int[NizBrojeva.Length / 2];
+            }
+            else
+            {
+                DrugiNiz = new int[(NizBrojeva.Length / 2) + 1];
+            }
+
+            for (int i = 0, j = NizBrojeva.Length - 1; i < NizBrojeva.Length / 2; i++, j--)
+            {
+                DrugiNiz[i] = NizBrojeva[i] + NizBrojeva[j];
+            }
+            
+            if (NizBrojeva.Length % 2 != 0)
+            {
+                DrugiNiz[DrugiNiz.Length - 1] = NizBrojeva[NizBrojeva.Length / 2];
+            }
+            
+            string Brojevi = string.Join("", DrugiNiz);
+                        
+            DrugiNiz = new int[Brojevi.Length];
+                        
+            for (int i = 0; i < Brojevi.Length; i++)
+            {
+                DrugiNiz[i] = int.Parse(Brojevi[i].ToString());
+            }
+
+            Gotovo = int.Parse(Brojevi);
+
+            if (Gotovo > 100)
+            {
+                Console.WriteLine(Gotovo);
+                return Izracunaj(DrugiNiz);
+            }
+
+            return Gotovo;
         }
     }
 }
