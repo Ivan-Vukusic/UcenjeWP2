@@ -9,12 +9,12 @@ namespace UcenjeCS.LjubavniKalkulator
     internal class Program
     {
         
-        public static void Izvedi()
+        public static void Izvedi() // metoda koja se izvodi
         {                       
-            Console.WriteLine(new Kalkulator(Unos("Unesi prvo ime: "), Unos("Unesi drugo ime: ")).Rezultat());
+            Console.WriteLine(new Kalkulator(Unos("Unesi prvo ime: "), Unos("Unesi drugo ime: ")).Rezultat()); 
         }
 
-        private static string Unos(string poruka)
+        private static string Unos(string poruka) // unos podataka
         {
             string unos;
             while (true)
