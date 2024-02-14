@@ -1,3 +1,5 @@
+using EdunovaAPP.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // prilagodba za dokumentaciju, èitati https://medium.com/geekculture/customizing-swagger-in-asp-net-core-5-2c98d03cbe52
 builder.Services.AddSwaggerGen(sgo =>
@@ -37,6 +38,12 @@ builder.Services.AddSwaggerGen(sgo =>
 });
 
 
+// dodavanje baze podataka
+builder.Services.AddDbContext<EdunovaContext>(o =>
+    o.UseSqlServer(builder.Configuration.GetConnectionString(name: "EdunovaContext"))
+);
+
+
 
 var app = builder.Build();
 
@@ -44,7 +51,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    // Moguænost generiranja poziva rute u CMD i Powershell
+    app.UseSwaggerUI(opcije =>
+    {
+        opcije.ConfigObject.
+        AdditionalItems.Add("requestSnippetsEnabled", true);
+    });
 }
 
 app.UseHttpsRedirection();
