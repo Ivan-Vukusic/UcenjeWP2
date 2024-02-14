@@ -1,6 +1,5 @@
 ﻿using DeratizacijaAPP.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DeratizacijaAPP.Controllers
 {
@@ -36,13 +35,31 @@ namespace DeratizacijaAPP.Controllers
         /// 
         /// </remarks>
         /// <returns>Vrste u bazi</returns>
-        /// <response code = "200">Sve ok</response>
+        /// <response code = "200">Sve ok, ako nema podataka content length: 0</response>
         /// <response code = "400">Zahtjev nije valjan</response>
-        /// <response code = "503"></response>
+        /// <response code = "503">Baza na koju se spajam nije dostupna</response>
         [HttpGet]
         public IActionResult Get()
         {
-            return new JsonResult(_context.Vrste.ToList());
+            // Kontrola ukoliko upit nije valjan
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var vrste = _context.Vrste.ToList();
+                if (vrste == null || vrste.Count == 0)
+                {
+                    return new EmptyResult();
+                }
+                return new JsonResult(vrste);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable,
+                    ex.Message);
+            }
         }
 
     }

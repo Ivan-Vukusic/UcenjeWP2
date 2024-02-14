@@ -14,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(sgo =>
 { // sgo je instanca klase SwaggerGenOptions
   // èitati https://devintxcontent.blob.core.windows.net/showcontent/Speaker%20Presentations%20Fall%202017/Web%20API%20Best%20Practices.pdf
+
     var o = new Microsoft.OpenApi.Models.OpenApiInfo()
     {
         Title = "Deratizacija API",
@@ -23,14 +24,17 @@ builder.Services.AddSwaggerGen(sgo =>
             Email = "ivukusic27@gmail.com",
             Name = "Ivan Vukušiæ"
         },
-        Description = "Ovo je dokumentacija za Deratizacija API",        
+        Description = "Ovo je dokumentacija za Deratizacija API",
+        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+        {
+            Name = "Edukacijska licenca"
+        }
     };
     sgo.SwaggerDoc("v1", o);
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     sgo.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
-
 });
 
 
