@@ -28,5 +28,10 @@ namespace DeratizacijaAPP.Data
         /// </summary>
         public DbSet<Djelatnik> Djelatnici { get; set; }
 
+        /// <summary>
+        /// Otrovi u bazi
+        /// </summary>
+        public DbSet<Otrov> Otrovi { get; set; }
+
     }
 }

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace DeratizacijaAPP.Controllers
 {
     /// <summary>
-    /// Namjenjeno za CRUD operacije nad entitetom Djelatnik u bazi
+    /// Namjenjeno za CRUD operacije nad entitetom Otrov u bazi
     /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class DjelatnikController : ControllerBase
+    public class OtrovController : ControllerBase
     {
         /// <summary>
         /// Kontekst za rad s bazom koji će biti postavljen pomoći Dependency Injection-a
@@ -21,21 +21,21 @@ namespace DeratizacijaAPP.Controllers
         /// pomoću DI principa
         /// </summary>
         /// <param name="context"></param>
-        public DjelatnikController(DeratizacijaContext context)
+        public OtrovController(DeratizacijaContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Dohvaća sve djelatnike iz baze
+        /// Dohvaća sve otrove iz baze
         /// </summary>
         /// <remarks>
         /// Primjer upita
         /// 
-        ///     GET api/v1/Djelatnik
+        ///     GET api/v1/Otrov
         /// 
         /// </remarks>
-        /// <returns>Djelatnici u bazi</returns>
+        /// <returns>Otrovi u bazi</returns>
         /// <response code = "200">Sve ok, ako nema podataka content length: 0</response>
         /// <response code = "400">Zahtjev nije valjan</response>
         /// <response code = "503">Baza na koju se spajam nije dostupna</response>
@@ -48,12 +48,12 @@ namespace DeratizacijaAPP.Controllers
             }
             try
             {
-                var djelatnici = _context.Djelatnici.ToList();
-                if (djelatnici == null || djelatnici.Count == 0)
+                var otrovi = _context.Otrovi.ToList();
+                if (otrovi == null || otrovi.Count == 0)
                 {
                     return new EmptyResult();
                 }
-                return new JsonResult(djelatnici);
+                return new JsonResult(otrovi);
             }
             catch (Exception ex)
             {
@@ -63,29 +63,29 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Dodaje novog djelatnika u bazu
+        /// Dodaje novi otrov u bazu
         /// </summary>
         /// <remarks>
-        ///     POST api/v1/Djelatnik
-        ///     {ime: "Primjer imena"}
+        ///     POST api/v1/Otrov
+        ///     {naziv: "Primjer naziva"}
         /// </remarks>
-        /// <param name="djelatnik">Djelatnik za unijeti u JSON formatu</param>
+        /// <param name="otrov">Otrov za unijeti u JSON formatu</param>
         /// <response code="201">Kreirano</response>
         /// <response code="400">Zahtjev nije valjan</response> 
         /// <response code="503">Baza nedostupna</response> 
-        /// <returns>Djelatnik sa šifrom koju je dala baza</returns>
+        /// <returns>Otrov sa šifrom koju je dala baza</returns>
         [HttpPost]
-        public IActionResult Post(Djelatnik djelatnik)
+        public IActionResult Post(Otrov otrov)
         {
-            if (!ModelState.IsValid || djelatnik == null)
+            if (!ModelState.IsValid || otrov == null)
             {
                 return BadRequest();
             }
             try
             {
-                _context.Djelatnici.Add(djelatnik);
+                _context.Otrovi.Add(otrov);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, djelatnik);
+                return StatusCode(StatusCodes.Status201Created, otrov);
             }
             catch (Exception ex)
             {
@@ -95,53 +95,51 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Mijenja podatke postojećeg djelatnika u bazi
+        /// Mijenja podatke postojećeg otrova u bazi
         /// </summary>
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    PUT api/v1/Djelatnik/1
+        ///    PUT api/v1/Otrov/1
         ///
         /// {
         ///  "sifra": 0,
-        ///  "ime": "Novo ime",
-        ///  "prezime": "Novo prezime",
-        ///  "broj mobitela": "099/123-4567"
-        ///  "oib": "12345678910"
-        ///  "struka": "Sanitarni tehničar"
+        ///  "naziv": "Novi naziv",
+        ///  "aktivna tvar": "bromadiolon",
+        ///  "količina": "1.5"
+        ///  "cas broj": "1234-56-7"  
         /// }
         /// </remarks>
-        /// <param name="sifra">Šifra djelatnika koji se mijenja</param>  
-        /// <param name="djelatnik">Djelatnik za unijeti u JSON formatu</param>         
+        /// <param name="sifra">Šifra otrova koji se mijenja</param>  
+        /// <param name="otrov">Otrov za unijeti u JSON formatu</param>         
         /// <response code="200">Sve je u redu</response>
-        /// <response code="204">Nema u bazi djelatnika kojeg želimo promijeniti</response>
+        /// <response code="204">Nema u bazi otrova kojeg želimo promijeniti</response>
         /// <response code="415">Nismo poslali JSON</response> 
         /// <response code="503">Baza nedostupna</response> 
-        /// <returns>Svi poslani podaci od djelatnika koji su spremljeni u bazi</returns>
+        /// <returns>Svi poslani podaci za otrov koji su spremljeni u bazi</returns>
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Djelatnik djelatnik)
+        public IActionResult Put(int sifra, Otrov otrov)
         {
-            if (sifra <= 0 || !ModelState.IsValid || djelatnik == null)
+            if (sifra <= 0 || !ModelState.IsValid || otrov == null)
             {
                 return BadRequest();
             }
             try
             {
-                var djelatnikUBazi = _context.Djelatnici.Find(sifra);
-                if (djelatnikUBazi == null)
+                var otrovUBazi = _context.Otrovi.Find(sifra);
+                if (otrovUBazi == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
-                djelatnikUBazi.Ime = djelatnik.Ime;
-                djelatnikUBazi.Prezime = djelatnik.Prezime;
-                djelatnikUBazi.BrojMobitela = djelatnik.BrojMobitela;
-                djelatnikUBazi.Oib = djelatnik.Oib;
-                djelatnikUBazi.Struka = djelatnik.Struka;
-
-                _context.Djelatnici.Update(djelatnikUBazi);
+                otrovUBazi.Naziv = otrov.Naziv;
+                otrovUBazi.AktivnaTvar = otrov.AktivnaTvar;
+                otrovUBazi.Kolicina = otrov.Kolicina;
+                otrovUBazi.CasBroj = otrov.CasBroj;
+                
+                _context.Otrovi.Update(otrovUBazi);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status200OK, djelatnikUBazi);
+                return StatusCode(StatusCodes.Status200OK, otrovUBazi);
             }
             catch (Exception ex)
             {
@@ -151,17 +149,17 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Briše djelatnika iz baze
+        /// Briše otrov iz baze
         /// </summary>
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    DELETE api/v1/Djelatnik/1
+        ///    DELETE api/v1/Otrov/1
         ///    
         /// </remarks>
-        /// <param name="sifra">Šifra djelatnika koji se briše</param>  
+        /// <param name="sifra">Šifra otrova koji se briše</param>  
         /// <response code="200">Sve je u redu, obrisano je u bazi</response>
-        /// <response code="204">Nema u bazi djelatnika kojeg želimo obrisati</response>
+        /// <response code="204">Nema u bazi otrova kojeg želimo obrisati</response>
         /// <response code="503">Problem s bazom</response>
         /// <returns>Odgovor da li je obrisano ili ne</returns>
         [HttpDelete]
@@ -175,13 +173,13 @@ namespace DeratizacijaAPP.Controllers
             }
             try
             {
-                var djelatnikUBazi = _context.Djelatnici.Find(sifra);
-                if (djelatnikUBazi == null)
+                var otrovUBazi = _context.Otrovi.Find(sifra);
+                if (otrovUBazi == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
 
-                _context.Djelatnici.Remove(djelatnikUBazi);
+                _context.Otrovi.Remove(otrovUBazi);
                 _context.SaveChanges();
                 return new JsonResult(new { poruka = "Obrisano" });
             }
