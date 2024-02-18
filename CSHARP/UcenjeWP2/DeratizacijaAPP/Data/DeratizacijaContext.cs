@@ -21,7 +21,12 @@ namespace DeratizacijaAPP.Data
         /// <summary>
         /// Vrste u bazi
         /// </summary>
-        public DbSet <Vrsta> Vrste { get; set; }
+        public DbSet<Vrsta> Vrste { get; set; }
+
+        /// <summary>
+        /// Djelatnici u bazi
+        /// </summary>
+        public DbSet<Djelatnik> Djelatnici { get; set; }
 
     }
 }

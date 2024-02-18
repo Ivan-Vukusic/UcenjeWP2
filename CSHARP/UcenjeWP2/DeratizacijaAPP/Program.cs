@@ -24,11 +24,7 @@ builder.Services.AddSwaggerGen(sgo =>
             Email = "ivukusic27@gmail.com",
             Name = "Ivan Vukušiæ"
         },
-        Description = "Ovo je dokumentacija za Deratizacija API",
-        License = new Microsoft.OpenApi.Models.OpenApiLicense()
-        {
-            Name = "Edukacijska licenca"
-        }
+        Description = "Ovo je dokumentacija za Deratizacija API"        
     };
     sgo.SwaggerDoc("v1", o);
 

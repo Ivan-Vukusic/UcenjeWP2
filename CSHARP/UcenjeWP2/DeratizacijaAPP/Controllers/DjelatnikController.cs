@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace DeratizacijaAPP.Controllers
 {
     /// <summary>
-    /// Namjenjeno za CRUD operacije nad entitetom Vrsta u bazi
+    /// Namjenjeno za CRUD operacije nad entitetom Djelatnik u bazi
     /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class VrstaController : ControllerBase
+    public class DjelatnikController : ControllerBase
     {
         /// <summary>
         /// Kontekst za rad s bazom koji će biti postavljen pomoći Dependency Injection-a
@@ -21,40 +21,39 @@ namespace DeratizacijaAPP.Controllers
         /// pomoću DI principa
         /// </summary>
         /// <param name="context"></param>
-        public VrstaController(DeratizacijaContext context)
+        public DjelatnikController(DeratizacijaContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Dohvaća sve vrste iz baze
+        /// Dohvaća sve djelatnike iz baze
         /// </summary>
         /// <remarks>
         /// Primjer upita
         /// 
-        ///     GET api/v1/vrsta
+        ///     GET api/v1/Djelatnik
         /// 
         /// </remarks>
-        /// <returns>Vrste u bazi</returns>
+        /// <returns>Djelatnici u bazi</returns>
         /// <response code = "200">Sve ok, ako nema podataka content length: 0</response>
         /// <response code = "400">Zahtjev nije valjan</response>
         /// <response code = "503">Baza na koju se spajam nije dostupna</response>
         [HttpGet]
         public IActionResult Get()
         {
-            // Kontrola ukoliko upit nije valjan
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             try
             {
-                var vrste = _context.Vrste.ToList();
-                if (vrste == null || vrste.Count == 0)
+                var djelatnici = _context.Djelatnici.ToList();
+                if (djelatnici == null || djelatnici.Count == 0)
                 {
                     return new EmptyResult();
                 }
-                return new JsonResult(vrste);
+                return new JsonResult(djelatnici);
             }
             catch (Exception ex)
             {
@@ -64,29 +63,29 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Dodaje novu vrstu u bazu
+        /// Dodaje novog djelatnika u bazu
         /// </summary>
         /// <remarks>
-        ///     POST api/v1/Vrsta
-        ///     {naziv: "Primjer naziva"}
+        ///     POST api/v1/Djelatnik
+        ///     {ime: "Primjer imena"}
         /// </remarks>
-        /// <param name="vrsta">Vrsta za unijeti u JSON formatu</param>
+        /// <param name="djelatnik">Djelatnik za unijeti u JSON formatu</param>
         /// <response code="201">Kreirano</response>
         /// <response code="400">Zahtjev nije valjan</response> 
         /// <response code="503">Baza nedostupna</response> 
-        /// <returns>Vrsta s šifrom koju je dala baza</returns>
+        /// <returns>Djelatnik sa šifrom koju je dala baza</returns>
         [HttpPost]
-        public IActionResult Post(Vrsta vrsta)
+        public IActionResult Post(Djelatnik djelatnik)
         {
-            if (!ModelState.IsValid || vrsta == null)
+            if (!ModelState.IsValid || djelatnik == null)
             {
                 return BadRequest();
             }
             try
             {
-                _context.Vrste.Add(vrsta);
+                _context.Djelatnici.Add(djelatnik);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, vrsta);
+                return StatusCode(StatusCodes.Status201Created, djelatnik);
             }
             catch (Exception ex)
             {
@@ -96,45 +95,53 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Mijenja podatke postojeće vrste u bazi
+        /// Mijenja podatke postojećeg djelatnika u bazi
         /// </summary>
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    PUT api/v1/vrsta/1
+        ///    PUT api/v1/Djelatnik/1
         ///
         /// {
         ///  "sifra": 0,
-        ///  "naziv": "Novi naziv",  
+        ///  "ime": "Novo ime",
+        ///  "prezime": "Novo prezime",
+        ///  "broj mobitela": "099/123-4567"
+        ///  "oib": "12345678910"
+        ///  "struka": "Sanitarni tehničar"
         /// }
         /// </remarks>
-        /// <param name="sifra">Šifra vrste koja se mijenja</param>  
-        /// <param name="vrsta">Vrsta za unijeti u JSON formatu</param>         
+        /// <param name="sifra">Šifra djelatnika koji se mijenja</param>  
+        /// <param name="djelatnik">Djelatnik za unijeti u JSON formatu</param>         
         /// <response code="200">Sve je u redu</response>
-        /// <response code="204">Nema u bazi vrste koju želimo promijeniti</response>
+        /// <response code="204">Nema u bazi djelatnika kojeg želimo promijeniti</response>
         /// <response code="415">Nismo poslali JSON</response> 
         /// <response code="503">Baza nedostupna</response> 
-        /// <returns>Svi poslani podaci od vrste koji su spremljeni u bazi</returns>
+        /// <returns>Svi poslani podaci od djelatnika koji su spremljeni u bazi</returns>
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Vrsta vrsta)
+        public IActionResult Put(int sifra, Djelatnik djelatnik)
         {
-            if (sifra <= 0 || !ModelState.IsValid || vrsta == null)
+            if (sifra <= 0 || !ModelState.IsValid || djelatnik == null)
             {
                 return BadRequest();
             }
             try
             {
-                var vrstaUBazi = _context.Vrste.Find(sifra);
-                if (vrstaUBazi == null)
+                var djelatnikUBazi = _context.Djelatnici.Find(sifra);
+                if (djelatnikUBazi == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
-                vrstaUBazi.Naziv = vrsta.Naziv;               
+                djelatnikUBazi.Ime = djelatnik.Ime;
+                djelatnikUBazi.Prezime = djelatnik.Prezime;
+                djelatnikUBazi.BrojMobitela = djelatnik.BrojMobitela;
+                djelatnikUBazi.Oib = djelatnik.Oib;
+                djelatnikUBazi.Struka = djelatnik.Struka;
 
-                _context.Vrste.Update(vrstaUBazi);
+                _context.Djelatnici.Update(djelatnikUBazi);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status200OK, vrstaUBazi);
+                return StatusCode(StatusCodes.Status200OK, djelatnikUBazi);
             }
             catch (Exception ex)
             {
@@ -144,17 +151,17 @@ namespace DeratizacijaAPP.Controllers
         }
 
         /// <summary>
-        /// Briše vrstu iz baze
+        /// Briše djelatnika iz baze
         /// </summary>
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    DELETE api/v1/vrsta/1
+        ///    DELETE api/v1/djelatnik/1
         ///    
         /// </remarks>
-        /// <param name="sifra">Šifra vrste koja se briše</param>  
+        /// <param name="sifra">Šifra djelatnika koji se briše</param>  
         /// <response code="200">Sve je u redu, obrisano je u bazi</response>
-        /// <response code="204">Nema u bazi smjera kojeg želimo obrisati</response>
+        /// <response code="204">Nema u bazi djelatnika kojeg želimo obrisati</response>
         /// <response code="503">Problem s bazom</response>
         /// <returns>Odgovor da li je obrisano ili ne</returns>
         [HttpDelete]
@@ -168,13 +175,13 @@ namespace DeratizacijaAPP.Controllers
             }
             try
             {
-                var vrstaUBazi = _context.Vrste.Find(sifra);
-                if (vrstaUBazi == null)
+                var djelatnikUBazi = _context.Djelatnici.Find(sifra);
+                if (djelatnikUBazi == null)
                 {
                     return StatusCode(StatusCodes.Status204NoContent, sifra);
                 }
 
-                _context.Vrste.Remove(vrstaUBazi);
+                _context.Djelatnici.Remove(djelatnikUBazi);
                 _context.SaveChanges();
                 return new JsonResult(new { poruka = "Obrisano" });
             }
