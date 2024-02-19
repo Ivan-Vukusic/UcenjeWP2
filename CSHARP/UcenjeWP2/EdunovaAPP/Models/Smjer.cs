@@ -6,7 +6,7 @@ namespace EdunovaAPP.Models
     /// <summary>
     /// Ovo mi je POCO koji mi je mapiran na bazu
     /// </summary>
-    public class Smjer:Entitet
+    public class Smjer : Entitet
     {
         /// <summary>
         /// Naziv u bazi
