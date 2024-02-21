@@ -27,6 +27,7 @@ namespace DeratizacijaAPP.Models
         /// <summary>
         /// Oib djelatnika
         /// </summary>
+        [StringLength(11, MinimumLength = 11, ErrorMessage ="Neispravan unos! OIB mora imati 11 znamenki")]
         public string? Oib { get; set; }
 
         /// <summary>
