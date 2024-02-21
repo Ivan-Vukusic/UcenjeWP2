@@ -1,4 +1,6 @@
-﻿namespace EdunovaAPP.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EdunovaAPP.Models
 {
     /// <summary>
     /// Ovo mi je POCO koji mi je mapiran na bazu
@@ -8,11 +10,13 @@
         /// <summary>
         /// Ime polaznika
         /// </summary>
+        [Required(ErrorMessage ="Ime obavezno")]
         public string? Ime { get; set; }
 
         /// <summary>
         /// Prezime polaznika
-        /// </summary>
+        /// </summary>           
+        [Required(ErrorMessage ="Prezime obavezno")]
         public string? Prezime { get; set; }
 
         /// <summary>
@@ -23,6 +27,7 @@
         /// <summary>
         /// Email polaznika
         /// </summary>
+        [Required(ErrorMessage ="Email obavezno")]
         public string? Email { get; set; }
 
         /// <summary>

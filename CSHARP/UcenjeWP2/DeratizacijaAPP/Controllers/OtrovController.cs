@@ -32,7 +32,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita
         /// 
-        ///     GET api/v1/Otrov
+        ///     GET api/v1/otrov
         /// 
         /// </remarks>
         /// <returns>Otrovi u bazi</returns>
@@ -66,7 +66,7 @@ namespace DeratizacijaAPP.Controllers
         /// Dodaje novi otrov u bazu
         /// </summary>
         /// <remarks>
-        ///     POST api/v1/Otrov
+        ///     POST api/v1/otrov
         ///     {naziv: "Primjer naziva"}
         /// </remarks>
         /// <param name="otrov">Otrov za unijeti u JSON formatu</param>
@@ -100,7 +100,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    PUT api/v1/Otrov/1
+        ///    PUT api/v1/otrov/1
         ///
         /// {
         ///  "sifra": 0,
@@ -154,7 +154,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    DELETE api/v1/Otrov/1
+        ///    DELETE api/v1/otrov/1
         ///    
         /// </remarks>
         /// <param name="sifra">Šifra otrova koji se briše</param>  

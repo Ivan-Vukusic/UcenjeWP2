@@ -19,9 +19,19 @@ namespace EdunovaAPP.Data
         }
 
         /// <summary>
-        /// Ovo su mi smjerovi u bazi
+        /// Ovo su smjerovi u bazi
         /// </summary>
         public DbSet<Smjer> Smjerovi { get; set; }
+
+        /// <summary>
+        /// Ovo su predavači u bazi
+        /// </summary>
+        public DbSet<Predavac> Predavaci { get; set; }
+
+        /// <summary>
+        /// Ovo su polaznici u bazi
+        /// </summary>
+        public DbSet<Polaznik> Polaznici { get; set; }
 
     }
 }

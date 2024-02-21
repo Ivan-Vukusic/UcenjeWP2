@@ -31,7 +31,7 @@ namespace EdunovaAPP.Controllers
         /// <remarks>
         /// Primjer upita
         /// 
-        ///    GET api/v1/Smjer
+        ///    GET api/v1/smjer
         ///    
         /// </remarks>
         /// <returns>Smjerovi u bazi</returns>
@@ -66,7 +66,7 @@ namespace EdunovaAPP.Controllers
         /// Dodaje novi smjer u bazu
         /// </summary>
         /// <remarks>
-        ///     POST api/v1/Smjer
+        ///     POST api/v1/smjer
         ///     {naziv: "Primjer naziva"}
         /// </remarks>
         /// <param name="smjer">Smjer za unijeti u JSON formatu</param>

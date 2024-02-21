@@ -32,7 +32,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita
         /// 
-        ///     GET api/v1/Djelatnik
+        ///     GET api/v1/djelatnik
         /// 
         /// </remarks>
         /// <returns>Djelatnici u bazi</returns>
@@ -66,7 +66,7 @@ namespace DeratizacijaAPP.Controllers
         /// Dodaje novog djelatnika u bazu
         /// </summary>
         /// <remarks>
-        ///     POST api/v1/Djelatnik
+        ///     POST api/v1/djelatnik
         ///     {ime: "Primjer imena"}
         /// </remarks>
         /// <param name="djelatnik">Djelatnik za unijeti u JSON formatu</param>
@@ -100,7 +100,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    PUT api/v1/Djelatnik/1
+        ///    PUT api/v1/djelatnik/1
         ///
         /// {
         ///  "sifra": 0,
@@ -156,7 +156,7 @@ namespace DeratizacijaAPP.Controllers
         /// <remarks>
         /// Primjer upita:
         ///
-        ///    DELETE api/v1/Djelatnik/1
+        ///    DELETE api/v1/djelatnik/1
         ///    
         /// </remarks>
         /// <param name="sifra">Šifra djelatnika koji se briše</param>  
