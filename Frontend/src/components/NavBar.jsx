@@ -35,11 +35,14 @@ function NavBar() {
                 Termini
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item href="#action/3.5">
                 Vrste
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown>            
           </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+        <Nav.Link target='_blank' href="http://korisnik117-001-site1.itempurl.com/swagger/index.html">API Dokumentacija</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
