@@ -25,7 +25,11 @@ function NavBar() {
           <Nav className="me-auto">
             
             <NavDropdown title="Izbornik" id="basic-nav-dropdown">
-              <NavDropdown.Item >Djelatnici</NavDropdown.Item>
+              <NavDropdown.Item 
+                onClick={()=>navigate(RoutesNames.DJELATNICI_PREGLED)}
+              >
+                Djelatnici
+              </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Otrovi
               </NavDropdown.Item>
