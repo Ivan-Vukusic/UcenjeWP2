@@ -7,8 +7,6 @@ export default function Pocetna(){
         <Container>
             Dobrodošli na Deratizacija aplikaciju
         </Container>
-
-
         </>
 
     );

@@ -46,7 +46,7 @@ function NavBar() {
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
-        <Nav.Link target='_blank' href="http://korisnik117-001-site1.itempurl.com/swagger/index.html">API Dokumentacija</Nav.Link>
+        <Nav.Link target='_blank' href="https://korisnik117-001-site1.itempurl.com/swagger/index.html">API Dokumentacija</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
