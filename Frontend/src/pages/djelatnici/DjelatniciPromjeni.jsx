@@ -5,6 +5,7 @@ import DjelatnikService from '../../services/DjelatnikService';
 import { RoutesNames } from '../../constants';
 
 export default function DjelatniciPromjeni(){
+
     const [djelatnik,setDjelatnik] = useState();
     const routeParams = useParams();
     const navigate = useNavigate();
@@ -55,48 +56,49 @@ export default function DjelatniciPromjeni(){
         <Container>
             
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='ime'>
+
+                <Form.Group controlId="ime">
                     <Form.Label>Ime</Form.Label>
                     <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.ime}
-                        name='ime'
+                        type="text"
+                        //defaultValue={djelatnik.ime}
+                        name="ime"
                     />                    
                 </Form.Group>
 
-                <Form.Group controlId='prezime'>
+                <Form.Group controlId="prezime">
                     <Form.Label>Prezime</Form.Label>
                     <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.prezime}
-                        name='prezime'
+                        type="text"
+                        //defaultValue={djelatnik.prezime}
+                        name="prezime"
                     />                    
                 </Form.Group>
 
-                <Form.Group controlId='brojMobitela'>
+                <Form.Group controlId="brojMobitela">
                     <Form.Label>Broj mobitela</Form.Label>
                     <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.brojMobitela}
-                        name='brojMobitela'
+                        type="text"
+                        //defaultValue={djelatnik.brojMobitela}
+                        name="brojMobitela"
                     />                    
                 </Form.Group>
 
-                <Form.Group controlId='oib'>
+                <Form.Group controlId="oib">
                     <Form.Label>OIB</Form.Label>
                     <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.oib}
-                        name='oib'
+                        type="text"
+                        //defaultValue={djelatnik.oib}
+                        name="oib"
                     />                    
                 </Form.Group>
 
-                <Form.Group controlId='struka'>
+                <Form.Group controlId="struka">
                     <Form.Label>Struka</Form.Label>
                     <Form.Control
-                        type='text'
+                        type="text"
                         defaultValue={djelatnik.struka}
-                        name='struka'
+                        name="struka"
                     />                    
                 </Form.Group>
 
