@@ -61,7 +61,7 @@ export default function DjelatniciPromjeni(){
                     <Form.Label>Ime</Form.Label>
                     <Form.Control
                         type="text"
-                        //defaultValue={djelatnik.ime}
+                        defaultValue={djelatnik.ime}
                         name="ime"
                     />                    
                 </Form.Group>
@@ -70,7 +70,7 @@ export default function DjelatniciPromjeni(){
                     <Form.Label>Prezime</Form.Label>
                     <Form.Control
                         type="text"
-                        //defaultValue={djelatnik.prezime}
+                        defaultValue={djelatnik.prezime}
                         name="prezime"
                     />                    
                 </Form.Group>
@@ -79,7 +79,7 @@ export default function DjelatniciPromjeni(){
                     <Form.Label>Broj mobitela</Form.Label>
                     <Form.Control
                         type="text"
-                        //defaultValue={djelatnik.brojMobitela}
+                        defaultValue={djelatnik.brojMobitela}
                         name="brojMobitela"
                     />                    
                 </Form.Group>
@@ -88,7 +88,7 @@ export default function DjelatniciPromjeni(){
                     <Form.Label>OIB</Form.Label>
                     <Form.Control
                         type="text"
-                        //defaultValue={djelatnik.oib}
+                        defaultValue={djelatnik.oib}
                         name="oib"
                     />                    
                 </Form.Group>
