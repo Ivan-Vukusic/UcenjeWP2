@@ -17,7 +17,7 @@ async function getBySifra(sifra){
     .then((res)=>{
         if(App.DEV) console.table(res.data);
 
-        return res.data;
+        return res;
     }).catch((e)=>{
         console.log(e);
         return {poruka: e}
@@ -37,7 +37,7 @@ async function dodajDjelatnika(djelatnik){
 }
 
 async function promjeniDjelatnika(sifra,djelatnik){
-    const odgovor = await httpService.put('/Djelatnik/'+sifra, djelatnik)
+    const odgovor = await httpService.put('/Djelatnik/' + sifra, djelatnik)
     .then(()=>{
         return {ok: true, poruka: 'Uspješna promjena'}
     })
