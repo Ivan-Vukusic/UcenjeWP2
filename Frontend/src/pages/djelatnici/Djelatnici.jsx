@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import DjelatnikService from "../../services/DjelatnikService";
-import { IoIosAdd } from "react-icons/io";
+import { IoPersonAddSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ export default function Djelatnici(){
 
         <Container>
             <Link to={RoutesNames.DJELATNICI_NOVI} className="btn btn-success gumb">                
-            <IoIosAdd  
+            <IoPersonAddSharp   
                 size={35}                
             /> Dodaj djelatnika
             </Link>
