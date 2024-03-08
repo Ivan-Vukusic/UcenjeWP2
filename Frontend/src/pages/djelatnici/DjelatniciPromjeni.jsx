@@ -6,7 +6,7 @@ import { RoutesNames } from '../../constants';
 
 export default function DjelatniciPromjeni(){
 
-    const [djelatnik,setDjelatnik] = useState();
+    const [djelatnik,setDjelatnik] = useState({});
     const routeParams = useParams();
     const navigate = useNavigate();
         
