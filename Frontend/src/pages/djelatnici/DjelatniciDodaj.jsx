@@ -43,6 +43,8 @@ export default function DjelatniciDodaj(){
                     <Form.Control
                         type='text'
                         name='ime'
+                        placeholder='Ime djelatnika'
+                        required
                     />                    
                 </Form.Group>
 
@@ -51,6 +53,8 @@ export default function DjelatniciDodaj(){
                     <Form.Control
                         type='text'
                         name='prezime'
+                        placeholder='Prezime djelatnika'
+                        required
                     />                    
                 </Form.Group>
 
@@ -59,6 +63,7 @@ export default function DjelatniciDodaj(){
                     <Form.Control
                         type='text'
                         name='brojMobitela'
+                        placeholder='Broj mobitela djelatnika'
                     />                    
                 </Form.Group>
 
@@ -67,6 +72,8 @@ export default function DjelatniciDodaj(){
                     <Form.Control
                         type='text'
                         name='oib'
+                        placeholder='OIB djelatnika'
+                        maxLength={11}
                     />                    
                 </Form.Group>
 
@@ -75,6 +82,7 @@ export default function DjelatniciDodaj(){
                     <Form.Control
                         type='text'
                         name='struka'
+                        placeholder='Struka djelatnika'
                     />                    
                 </Form.Group>
 

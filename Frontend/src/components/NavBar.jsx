@@ -30,9 +30,11 @@ function NavBar() {
               >
                 Djelatnici
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.OTROVI_PREGLED)}>
                 Otrovi
               </NavDropdown.Item>
+              
               <NavDropdown.Item href="#action/3.3">Objekti</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
