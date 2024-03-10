@@ -7,7 +7,11 @@ export const RoutesNames = {
 
     OTROVI_PREGLED: '/otrovi',
     OTROVI_NOVI: '/otrovi/dodaj',
-    OTROVI_PROMJENI: '/otrovi/:sifra'
+    OTROVI_PROMJENI: '/otrovi/:sifra',
+
+    VRSTE_PREGLED: '/vrste',
+    VRSTE_NOVI: '/vrste/dodaj',
+    VRSTE_PROMJENI: '/vrste/:sifra'
 };
 
 export const App = {

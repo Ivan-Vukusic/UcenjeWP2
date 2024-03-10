@@ -9,6 +9,9 @@ import DjelatniciPromjeni from "./pages/djelatnici/DjelatniciPromjeni"
 import Otrovi from "./pages/otrovi/Otrovi"
 import OtroviDodaj from "./pages/otrovi/OtroviDodaj"
 import OtroviPromjeni from "./pages/otrovi/OtroviPromjeni"
+import Vrste from "./pages/vrste/Vrste"
+import VrsteDodaj from "./pages/vrste/VrsteDodaj"
+import VrstePromjeni from "./pages/vrste/VrstePromjeni"
 
 
 function App() {  
@@ -27,6 +30,10 @@ function App() {
       <Route path={RoutesNames.OTROVI_PREGLED} element={<Otrovi />} />
       <Route path={RoutesNames.OTROVI_NOVI} element={<OtroviDodaj />} />
       <Route path={RoutesNames.OTROVI_PROMJENI} element={<OtroviPromjeni />} />
+
+      <Route path={RoutesNames.VRSTE_PREGLED} element={<Vrste />} />
+      <Route path={RoutesNames.VRSTE_NOVI} element={<VrsteDodaj />} />
+      <Route path={RoutesNames.VRSTE_PROMJENI} element={<VrstePromjeni />} />
       </>
     </Routes>
     </>

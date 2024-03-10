@@ -18,6 +18,7 @@ export default function OtroviDodaj(){
 
     function handleSubmit(e){
         e.preventDefault();
+
         const podaci = new FormData(e.target);        
         
         const otrov =
@@ -37,6 +38,7 @@ export default function OtroviDodaj(){
         <Container>
             
             <Form onSubmit={handleSubmit}>
+                
                 <Form.Group controlId='naziv'>
                     <Form.Label>Naziv</Form.Label>
                     <Form.Control

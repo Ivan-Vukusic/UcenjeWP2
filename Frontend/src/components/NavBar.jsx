@@ -36,14 +36,19 @@ function NavBar() {
               </NavDropdown.Item>
               
               <NavDropdown.Item href="#action/3.3">Objekti</NavDropdown.Item>
+
               <NavDropdown.Divider />
+
               <NavDropdown.Item href="#action/3.4">
                 Termini
               </NavDropdown.Item>
+              
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.5">
+
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.VRSTE_PREGLED)}>
                 Vrste
               </NavDropdown.Item>
+
             </NavDropdown>            
           </Nav>
         </Navbar.Collapse>
