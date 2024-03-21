@@ -11,7 +11,11 @@ export const RoutesNames = {
 
     VRSTE_PREGLED: '/vrste',
     VRSTE_NOVI: '/vrste/dodaj',
-    VRSTE_PROMJENI: '/vrste/:sifra'
+    VRSTE_PROMJENI: '/vrste/:sifra',
+
+    OBJEKTI_PREGLED: '/objekti',
+    OBJEKTI_NOVI: '/objekti/dodaj',
+    OBJEKTI_PROMJENI: '/objekti/:sifra'
 };
 
 export const App = {

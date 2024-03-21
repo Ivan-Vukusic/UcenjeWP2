@@ -12,7 +12,8 @@ import OtroviPromjeni from "./pages/otrovi/OtroviPromjeni"
 import Vrste from "./pages/vrste/Vrste"
 import VrsteDodaj from "./pages/vrste/VrsteDodaj"
 import VrstePromjeni from "./pages/vrste/VrstePromjeni"
-
+import Objekti from "./pages/objekti/Objekti"
+import ObjektiDodaj from "./pages/objekti/ObjektiDodaj"
 
 function App() {  
 
@@ -34,6 +35,9 @@ function App() {
       <Route path={RoutesNames.VRSTE_PREGLED} element={<Vrste />} />
       <Route path={RoutesNames.VRSTE_NOVI} element={<VrsteDodaj />} />
       <Route path={RoutesNames.VRSTE_PROMJENI} element={<VrstePromjeni />} />
+
+      <Route path={RoutesNames.OBJEKTI_PREGLED} element={<Objekti />} />
+      <Route path={RoutesNames.OBJEKTI_NOVI} element={<ObjektiDodaj />} />
       </>
     </Routes>
     </>
