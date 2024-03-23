@@ -14,6 +14,7 @@ import VrsteDodaj from "./pages/vrste/VrsteDodaj"
 import VrstePromjeni from "./pages/vrste/VrstePromjeni"
 import Objekti from "./pages/objekti/Objekti"
 import ObjektiDodaj from "./pages/objekti/ObjektiDodaj"
+import ObjektiPromjeni from "./pages/objekti/ObjektiPromjeni"
 
 function App() {  
 
@@ -38,6 +39,7 @@ function App() {
 
       <Route path={RoutesNames.OBJEKTI_PREGLED} element={<Objekti />} />
       <Route path={RoutesNames.OBJEKTI_NOVI} element={<ObjektiDodaj />} />
+      <Route path={RoutesNames.OBJEKTI_PROMJENI} element={<ObjektiPromjeni />} />
       </>
     </Routes>
     </>

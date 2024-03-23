@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { IoIosAdd } from "react-icons/io";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { BsBuildingAdd } from "react-icons/bs";
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -50,48 +51,43 @@ export default function Objekti(){
 
         <Container>
             <Link to={RoutesNames.OBJEKTI_NOVI} className="btn btn-success gumb">
-                <IoIosAdd
+                <BsBuildingAdd
                 size={25}
                 /> Dodaj objekt
             </Link>
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
-                        <th>Mjesto</th>
-                        <th>Adresa</th>
-                        <th>Vrsta</th>                        
-                        <th>Mogućnosti </th>
+                        <th className="sredina">Mjesto</th>
+                        <th className="sredina">Adresa</th>
+                        <th className="sredina">Vrsta</th>                        
+                        <th className="sredina">Mogućnosti</th>
                     </tr>
                 </thead>
                 <tbody>
                     {objekti && objekti.map((entitet,index)=>(
                         <tr key={index}>
-                            <td>{entitet.mjesto}</td>
-                            <td>{entitet.adresa}</td>
-                            <td>{entitet.vrstaNaziv}</td>
-                            <td>
-                                
-                                
-                            </td>
+                            <td className="sredina">{entitet.mjesto}</td>
+                            <td className="sredina">{entitet.adresa}</td>
+                            <td className="sredina">{entitet.vrstaNaziv}</td>
+                            
                             <td className="sredina">
-                                    <Button
-                                        variant='primary'
-                                        onClick={()=>{navigate(`/objekti/${entitet.sifra}`)}}
-                                    >
-                                        <FaEdit 
-                                    size={25}
+                            <Button 
+                                    variant="primary"
+                                onClick={()=>{navigate(`/objekti/${entitet.sifra}`)}}>                
+                                    <FaRegEdit   
+                                    size={35}                
                                     />
-                                    </Button>
-                               
-                                
-                                    &nbsp;&nbsp;&nbsp;
-                                    <Button
-                                        variant='danger'
-                                        onClick={() => obrisiObjekt(entitet.sifra)}
-                                    >
-                                        <FaTrash
-                                        size={25}/>
-                                    </Button>
+                                </Button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Button
+                                    variant="danger"
+                                    onClick={()=>obrisiObjekt(entitet.sifra)}
+                                >                
+                                    <RiDeleteBinLine    
+                                    size={35}                
+                                    />
+                                </Button>
 
                             </td>
                         </tr>
