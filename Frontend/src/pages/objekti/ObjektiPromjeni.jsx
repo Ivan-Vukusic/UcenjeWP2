@@ -41,7 +41,7 @@ export default function ObjektiPromjeni(){
         
         promjeni({
             mjesto: podaci.get('mjesto'),
-            adresa: podaci.get('adresa'),
+            adresa: podaci.get('adresa'),            
             vrstaSifra: parseInt('vrstaSifra')            
         });
     }
@@ -69,7 +69,7 @@ export default function ObjektiPromjeni(){
                         defaultValue={objekt.adresa}
                         required
                     />                    
-                </Form.Group>
+                </Form.Group>                
 
                 <Form.Group controlId='vrstaSifra'>
                     <Form.Label>Vrsta</Form.Label>

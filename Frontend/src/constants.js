@@ -15,7 +15,11 @@ export const RoutesNames = {
 
     OBJEKTI_PREGLED: '/objekti',
     OBJEKTI_NOVI: '/objekti/dodaj',
-    OBJEKTI_PROMJENI: '/objekti/:sifra'
+    OBJEKTI_PROMJENI: '/objekti/:sifra',
+
+    TERMINI_PREGLED:'/termini',
+    TERMINI_NOVI: '/termini/dodaj',
+    TERMINI_PROMJENI: '/termini/:sifra'
 };
 
 export const App = {

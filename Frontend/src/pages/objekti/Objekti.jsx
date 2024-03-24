@@ -18,16 +18,8 @@ export default function Objekti(){
     async function dohvatiObjekte(){
         await ObjektService.get()
         .then((res)=>{
-
-            let objekti = res.data;
-            objekti.forEach(e => {
-                if(e.mjesto==null){
-                    e.mjesto=0;
-                }
-
-            });
-            setObjekti(objekti);
-        })
+            setObjekti(res.data);
+        })       
         .catch((e)=>{
             alert(e);
         });
