@@ -2,20 +2,26 @@ import { Route, Routes } from "react-router-dom"
 import Pocetna from "./pages/Pocetna"
 import { RoutesNames } from "./constants"
 import Navbar from "./components/NavBar"
-import Djelatnici from "./pages/djelatnici/Djelatnici"
 import './App.css';
+
+import Djelatnici from "./pages/djelatnici/Djelatnici"
 import DjelatniciDodaj from "./pages/djelatnici/DjelatniciDodaj"
 import DjelatniciPromjeni from "./pages/djelatnici/DjelatniciPromjeni"
+
 import Otrovi from "./pages/otrovi/Otrovi"
 import OtroviDodaj from "./pages/otrovi/OtroviDodaj"
 import OtroviPromjeni from "./pages/otrovi/OtroviPromjeni"
+
 import Vrste from "./pages/vrste/Vrste"
 import VrsteDodaj from "./pages/vrste/VrsteDodaj"
 import VrstePromjeni from "./pages/vrste/VrstePromjeni"
+
 import Objekti from "./pages/objekti/Objekti"
 import ObjektiDodaj from "./pages/objekti/ObjektiDodaj"
 import ObjektiPromjeni from "./pages/objekti/ObjektiPromjeni"
+
 import Termini from "./pages/termini/Termini"
+import TerminiDodaj from "./pages/termini/TerminiDodaj"
 
 function App() {  
 
@@ -43,6 +49,7 @@ function App() {
       <Route path={RoutesNames.OBJEKTI_PROMJENI} element={<ObjektiPromjeni />} />
 
       <Route path={RoutesNames.TERMINI_PREGLED} element={<Termini />} />
+      <Route path={RoutesNames.TERMINI_NOVI} element={<TerminiDodaj />} />
       </>
     </Routes>
     </>

@@ -6,7 +6,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
 import ObjektService from "../../services/ObjektService";
 import { RoutesNames } from "../../constants";
 

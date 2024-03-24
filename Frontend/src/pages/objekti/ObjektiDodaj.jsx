@@ -11,13 +11,13 @@ import { RoutesNames } from '../../constants';
 export default function ObjektiDodaj() {
   const navigate = useNavigate();
 
-  const [vrsta, setVrsta] = useState([]);  
+  const [vrste, setVrste] = useState([]);  
   const [vrstaSifra, setVrstaSifra] = useState(0);
 
   async function dohvatiVrste(){
     await VrstaService.getVrste().
       then((odgovor)=>{
-        setVrsta(odgovor.data);
+        setVrste(odgovor.data);
         setVrstaSifra(odgovor.data[0].sifra);
       });
   } 
@@ -85,7 +85,7 @@ export default function ObjektiDodaj() {
                         <Form.Select multiple={true}
                         onChange={(e) => {setVrstaSifra(e.target.value)}}
                         >                                            
-                        {vrsta && vrsta.map((v,index)=>(
+                        {vrste && vrste.map((v,index)=>(
                         <option key={index} value={v.sifra}>
                         {v.naziv}
                         </option>

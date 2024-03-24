@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { BsBuildingAdd } from "react-icons/bs";
+import { MdOutlineNoteAdd } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -52,7 +52,7 @@ export default function Termini(){
 
         <Container>
             <Link to={RoutesNames.TERMINI_NOVI} className="btn btn-success gumb">
-                <BsBuildingAdd
+                <MdOutlineNoteAdd
                 size={25}
                 /> Dodaj termin
             </Link>
