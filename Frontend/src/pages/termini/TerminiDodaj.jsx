@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import moment from "moment";
 
 import TerminService from "../../services/TerminService";
 import DjelatnikService from "../../services/DjelatnikService";
@@ -103,6 +104,15 @@ export default function TerminiDodaj(){
               <Form.Control
                   type='date'
                   name='datum'                  
+                  required
+              />                    
+          </Form.Group>          
+
+          <Form.Group controlId='vrijeme'>
+              <Form.Label>Vrijeme</Form.Label>
+              <Form.Control
+                  type='time'
+                  name='vrijeme'                  
                   required
               />                    
           </Form.Group>          
