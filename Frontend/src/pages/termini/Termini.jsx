@@ -37,16 +37,7 @@ export default function Termini(){
         } else {
           alert(odgovor.poruka);
         }
-      }        
-
-      function formatirajDatum(datum){
-        let mdp = moment.utc(datum);
-        if(mdp.hour()==0 && mdp.minutes()==0){
-            return mdp.format('DD. MM. YYYY.');
-        }
-        return mdp.format('DD. MM. YYYY. HH:mm');        
-      }
-
+      }   
 
     return (
 
@@ -71,14 +62,11 @@ export default function Termini(){
                     {termini && termini.map((entitet,index)=>(
                         <tr key={index}>
                             <td className="sredina">
-                                <p>
-                                {entitet.datum==null 
-                                ? 'Nije definirano'
-                                :   
-                                formatirajDatum(entitet.datum)
+                                {
+                                   entitet.datum == null ? 'Nije uneseno' : moment.utc(entitet.datum).format('DD.MM.YYYY.')
                                 }
-                                </p>
                                 </td>
+
                             <td className="sredina">{entitet.djelatnikImePrezime}</td>
                             <td className="sredina">{entitet.objektMjestoAdresa}</td>
                             <td className="sredina">{entitet.otrovNaziv}</td>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import moment from "moment";
 
 import TerminService from "../../services/TerminService";
 import DjelatnikService from "../../services/DjelatnikService";
@@ -71,21 +70,10 @@ export default function TerminiDodaj(){
     function handleSubmit(e) {
         e.preventDefault();
     
-        const podaci = new FormData(e.target);       
-    
-        if(podaci.get('datum')=='' && podaci.get('vrijeme')!=''){
-          alert('Ako postavljate vrijeme morate i datum');
-          return;
-        }
-        let datum='';
-        if(podaci.get('datum')!='' && podaci.get('vrijeme')==''){
-          datum = podaci.get('datum') + 'T00:00:00.000Z';
-        }else{
-          datum = podaci.get('datum') + 'T' + podaci.get('vrijeme') + ':00.000Z';
-        }       
+        const podaci = new FormData(e.target);                
     
         dodaj({
-          datum: datum,          
+          datum: podaci.get('datum'),          
           djelatnikSifra: parseInt(djelatnikSifra),
           objektSifra: parseInt(objektSifra),
           otrovSifra: parseInt(otrovSifra),
@@ -103,19 +91,11 @@ export default function TerminiDodaj(){
               <Form.Label>Datum</Form.Label>
               <Form.Control
                   type='date'
-                  name='datum'                  
+                  name='datum'
+                  placeholder='Datum termina'                  
                   required
               />                    
-          </Form.Group>          
-
-          <Form.Group controlId='vrijeme'>
-              <Form.Label>Vrijeme</Form.Label>
-              <Form.Control
-                  type='time'
-                  name='vrijeme'                  
-                  required
-              />                    
-          </Form.Group>          
+          </Form.Group>            
 
           <Form.Group controlId='djelatnik'>
               <Form.Label>Djelatnik</Form.Label>
