@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ObjektService from '../../services/ObjektService';
+import VrstaService from '../../services/VrstaService';
 import { RoutesNames } from '../../constants';
 
 export default function ObjektiPromjeni(){
@@ -9,6 +10,17 @@ export default function ObjektiPromjeni(){
     const [objekt,setObjekt] = useState({});
     const routeParams = useParams();
     const navigate = useNavigate();
+
+    const [vrste, setVrste] = useState([]);  
+  const [vrstaSifra, setVrstaSifra] = useState(0);
+
+  async function dohvatiVrste(){
+    await VrstaService.getVrste().
+      then((odgovor)=>{
+        setVrste(odgovor.data);
+        setVrstaSifra(odgovor.data[0].sifra);
+      });
+  } 
         
     async function dohvatiObjekt(){
         await ObjektService.getBySifra(routeParams.sifra)
@@ -22,6 +34,7 @@ export default function ObjektiPromjeni(){
 
     useEffect(()=>{
         dohvatiObjekt();
+        dohvatiVrste();
     },[]);
 
     async function promjeni(objekt){
@@ -42,7 +55,7 @@ export default function ObjektiPromjeni(){
         promjeni({
             mjesto: podaci.get('mjesto'),
             adresa: podaci.get('adresa'),            
-            vrstaSifra: parseInt('vrstaSifra')            
+            vrstaSifra: parseInt(vrstaSifra)            
         });
     }
 
@@ -71,14 +84,17 @@ export default function ObjektiPromjeni(){
                     />                    
                 </Form.Group>                
 
-                <Form.Group controlId='vrstaSifra'>
+                <Form.Group controlId='vrsta'>
                     <Form.Label>Vrsta</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='vrstaSifra'
-                        defaultValue={objekt.vrstaSifra}
-                        required
-                    />                    
+                        <Form.Select 
+                        onChange={(e) => {setVrstaSifra(e.target.value)}}
+                        >                                            
+                        {vrste && vrste.map((v,index)=>(
+                        <option key={index} value={v.sifra}>
+                        {v.naziv}
+                        </option>
+                        ))}
+                    </Form.Select>                    
                 </Form.Group>
 
                 <Row>

@@ -82,7 +82,7 @@ export default function ObjektiDodaj() {
 
                 <Form.Group controlId='vrsta'>
                     <Form.Label>Vrsta</Form.Label>
-                        <Form.Select multiple={true}
+                        <Form.Select 
                         onChange={(e) => {setVrstaSifra(e.target.value)}}
                         >                                            
                         {vrste && vrste.map((v,index)=>(
