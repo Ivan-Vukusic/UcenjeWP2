@@ -26,15 +26,17 @@ function NavBar() {
             
             <NavDropdown title="Izbornik" id="basic-nav-dropdown">
               <NavDropdown.Item 
-                onClick={()=>navigate(RoutesNames.DJELATNICI_PREGLED)}>Djelatnici</NavDropdown.Item>
-
-              <NavDropdown.Item onClick={()=>navigate(RoutesNames.OTROVI_PREGLED)}>Otrovi</NavDropdown.Item>
+                onClick={()=>navigate(RoutesNames.TERMINI_PREGLED)}>Termini</NavDropdown.Item>
               
-              <NavDropdown.Item onClick={()=>navigate(RoutesNames.OBJEKTI_PREGLED)}>Objekti</NavDropdown.Item>
-
               <NavDropdown.Divider />
+              
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.DJELATNICI_PREGLED)}>Djelatnici</NavDropdown.Item>
+              
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.OTROVI_PREGLED)}>Otrovi</NavDropdown.Item>
 
-              <NavDropdown.Item onClick={()=>navigate(RoutesNames.TERMINI_PREGLED)}>Termini</NavDropdown.Item>
+              
+
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.OBJEKTI_PREGLED)}>Objekti</NavDropdown.Item>
               
               <NavDropdown.Divider />
 
