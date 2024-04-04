@@ -59,8 +59,8 @@ export default function Otrovi(){
                         <tr key={index}>
                             <td className="sredina">{otrov.naziv}</td>
                             <td className="sredina">{otrov.aktivnaTvar}</td>
-                            <td className="sredina">{otrov.kolicina}</td>                            
-                            <td className="sredina">{otrov.casBroj}</td>                            
+                            <td className="sredina">{otrov.kolicina  == null ? 'Nije definirano' : otrov.kolicina}</td>                            
+                            <td className="sredina">{otrov.casBroj == null || otrov.casBroj.trim() == '' ? 'Nije definirano' : otrov.casBroj}</td>                            
                             <td className="sredina">
                                 <Button 
                                     variant="primary"
