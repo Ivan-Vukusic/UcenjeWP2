@@ -14,13 +14,14 @@ export default function Vrste(){
     const navigate = useNavigate();
 
     async function dohvatiVrste(){
-        await VrstaService.getVrste()
-        .then((res)=>{
-            setVrste(res.data);
-        })
-        .catch((e)=>{
-            alert(e); 
-        });
+        
+        const odgovor = await VrstaService.get('Vrsta');
+        if(!odgovor.ok){
+            prikaziError(odgovor.podaci);
+            return;
+        }
+        setVrste(odgovor.podaci);
+        
     }
 
     useEffect(()=>{
@@ -28,9 +29,10 @@ export default function Vrste(){
     },[]); 
     
     async function obrisiVrstu(sifra){
-        const odgovor = await VrstaService.obrisiVrstu(sifra);
-        if(odgovor.ok){
-            alert(odgovor.poruka.data.poruka);
+        
+        const odgovor = await VrstaService.obrisi('Vrsta',sifra);
+        //prikaziError(odgovor.podaci);
+        if (odgovor.ok){
             dohvatiVrste();
         }
         

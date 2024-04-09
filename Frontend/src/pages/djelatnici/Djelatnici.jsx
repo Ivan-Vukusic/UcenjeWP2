@@ -8,19 +8,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 
 
+
 export default function Djelatnici(){
 
     const [djelatnici,setDjelatnici] = useState();
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
 
     async function dohvatiDjelatnike(){
-        await DjelatnikService.getDjelatnici()
-        .then((res)=>{
-            setDjelatnici(res.data);
-        })
-        .catch((e)=>{
-            alert(e); 
-        });
+        
+        const odgovor = await DjelatnikService.get('Djelatnik');
+        if(!odgovor.ok){
+            prikaziError(odgovor.podaci);
+            return;
+        }
+        setDjelatnici(odgovor.podaci);
+        
     }
 
     useEffect(()=>{
@@ -28,9 +30,10 @@ export default function Djelatnici(){
     },[]); 
     
     async function obrisiDjelatnika(sifra){
-        const odgovor = await DjelatnikService.obrisiDjelatnika(sifra);
-        if(odgovor.ok){
-            alert(odgovor.poruka.data.poruka);
+        
+        const odgovor = await DjelatnikService.obrisi('Djelatnik',sifra);
+        //prikaziError(odgovor.podaci);
+        if (odgovor.ok){
             dohvatiDjelatnike();
         }
         

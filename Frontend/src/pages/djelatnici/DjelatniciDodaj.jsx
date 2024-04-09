@@ -7,30 +7,27 @@ export default function DjelatniciDodaj(){
     const navigate = useNavigate();
 
     async function dodajDjelatnika(djelatnik){
-        const odgovor = await DjelatnikService.dodajDjelatnika(djelatnik);
-        if (odgovor.ok){
-            navigate(RoutesNames.DJELATNICI_PREGLED);
-          }else{
-            console.log(odgovor);
-            alert(odgovor.poruka);
-          }
+        
+        const odgovor = await DjelatnikService.dodaj('Djelatnik', djelatnik);
+        if(odgovor.ok){
+          navigate(RoutesNames.DJELATNICI_PREGLED);
+          return
+        }
+        prikaziError(odgovor.podaci);
+        
     }
 
     function handleSubmit(e){
         e.preventDefault();
         const podaci = new FormData(e.target);        
         
-        const djelatnik =
-        {            
+        dodajDjelatnika({            
             ime: podaci.get('ime'),
             prezime: podaci.get('prezime'),
             brojMobitela: podaci.get('brojMobitela'),
             oib: podaci.get('oib'),
             struka: podaci.get('struka')
-          };
-
-          dodajDjelatnika(djelatnik);
-
+          });
     }
 
     return(

@@ -22,12 +22,12 @@ import ObjektiPromjeni from "./pages/objekti/ObjektiPromjeni"
 
 import Termini from "./pages/termini/Termini"
 import TerminiDodaj from "./pages/termini/TerminiDodaj"
-import TerminiPromjeni from "./pages/termini/TerminiPromjeni";
+import TerminiPromjeni from "./pages/termini/TerminiPromjeni"
 
 function App() {  
-
+  
   return (
-    <>
+    <>    
     <Navbar />
     <Routes>
       <>

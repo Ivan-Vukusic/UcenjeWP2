@@ -10,28 +10,27 @@ export default function VrstePromjeni(){
     const routeParams = useParams();
     const navigate = useNavigate();
         
-    async function dohvatiVrstu(){
-        await VrstaService.getBySifra(routeParams.sifra)
-        .then((res)=>{
-            setVrstu(res.data)
-        })
-        .catch((e)=>{
-            alert(e.poruka);            
-        })
+    async function dohvatiVrstu(){        
+        const odgovor = await VrstaService.getBySifra('Vrsta',routeParams.sifra)
+        if(!odgovor.ok){
+            //prikaziError(odgovor.podaci);
+            navigate(RoutesNames.VRSTE_PREGLED);
+            return;
+        }
+        setVrstu(odgovor.podaci);          
     }
 
-    useEffect(()=>{
-        dohvatiVrstu();
-    },[]);
+  useEffect(()=>{
+      dohvatiVrstu();
+  },[]);
 
-    async function promjeniVrstu(vrsta){
-        const odgovor = await VrstaService.promjeniVrstu(routeParams.sifra, vrsta);
-        if (odgovor.ok){
-            navigate(RoutesNames.VRSTE_PREGLED);
-          }else{
-            console.log(odgovor);
-            alert(odgovor.poruka);
-          }
+  async function promjeniVrstu(vrsta){        
+        const odgovor = await VrstaService.promjeni('Vrsta',routeParams.sifra, vrsta);
+        if(odgovor.ok){
+          navigate(RoutesNames.VRSTE_PREGLED);            
+          return;
+        }
+        prikaziError(odgovor.podaci);          
     }
 
     function handleSubmit(e){
@@ -39,12 +38,9 @@ export default function VrstePromjeni(){
         
         const podaci = new FormData(e.target);        
         
-        const vrsta =
-        {            
+        promjeniVrstu({            
             naziv: podaci.get('naziv')                        
-          };
-
-          promjeniVrstu(vrsta);
+          });          
     }
 
     return(

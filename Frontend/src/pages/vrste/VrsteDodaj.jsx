@@ -7,13 +7,14 @@ export default function VrsteDodaj(){
     const navigate = useNavigate();
 
     async function dodajVrstu(vrsta){
-        const odgovor = await VrstaService.dodajVrstu(vrsta);
-        if (odgovor.ok){
-            navigate(RoutesNames.VRSTE_PREGLED);
-          }else{
-            console.log(odgovor);
-            alert(odgovor.poruka);
-          }
+        
+        const odgovor = await VrstaService.dodaj('Vrsta', vrsta);
+        if(odgovor.ok){
+          navigate(RoutesNames.VRSTE_PREGLED);
+          return
+        }
+        prikaziError(odgovor.podaci);
+        
     }
 
     function handleSubmit(e){
@@ -21,13 +22,9 @@ export default function VrsteDodaj(){
 
         const podaci = new FormData(e.target);        
         
-        const vrsta =
-        {            
+        dodajVrstu({            
             naziv: podaci.get('naziv')                        
-        };
-
-          dodajVrstu(vrsta);
-
+        });
     }
 
     return(

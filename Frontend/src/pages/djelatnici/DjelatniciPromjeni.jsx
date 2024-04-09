@@ -10,45 +10,41 @@ export default function DjelatniciPromjeni(){
     const routeParams = useParams();
     const navigate = useNavigate();
         
-    async function dohvatiDjelatnika(){
-        await DjelatnikService.getBySifra(routeParams.sifra)
-        .then((res)=>{
-            setDjelatnik(res.data)
-        })
-        .catch((e)=>{
-            alert(e.poruka);            
-        })
-    }
+    async function dohvatiDjelatnika(){        
+          const odgovor = await DjelatnikService.getBySifra('Djelatnik',routeParams.sifra)
+          if(!odgovor.ok){
+              prikaziError(odgovor.podaci);
+              navigate(RoutesNames.DJELATNICI_PREGLED);
+              return;
+          }
+          setDjelatnik(odgovor.podaci);          
+      }
 
     useEffect(()=>{
         dohvatiDjelatnika();
     },[]);
 
-    async function promjeniDjelatnika(djelatnik){
-        const odgovor = await DjelatnikService.promjeniDjelatnika(routeParams.sifra,djelatnik);
-        if (odgovor.ok){
-            navigate(RoutesNames.DJELATNICI_PREGLED);
-          }else{
-            console.log(odgovor);
-            alert(odgovor.poruka);
+    async function promjeniDjelatnika(djelatnik){        
+          const odgovor = await DjelatnikService.promjeni('Djelatnik',routeParams.sifra, djelatnik);
+          if(odgovor.ok){
+            navigate(RoutesNames.DJELATNICI_PREGLED);            
+            return;
           }
-    }
+          prikaziError(odgovor.podaci);          
+      }
 
     function handleSubmit(e){
         e.preventDefault();
         
         const podaci = new FormData(e.target);        
         
-        const djelatnik =
-        {            
+        promjeniDjelatnika({            
             ime: podaci.get('ime'),
             prezime: podaci.get('prezime'),
             brojMobitela: podaci.get('brojMobitela'),
             oib: podaci.get('oib'),
             struka: podaci.get('struka')
-          };
-
-          promjeniDjelatnika(djelatnik);
+          });          
     }
 
     return(
@@ -89,6 +85,7 @@ export default function DjelatniciPromjeni(){
                         type='text'
                         defaultValue={djelatnik.oib}
                         name='oib'
+                        maxLength={11}
                     />                    
                 </Form.Group>
 
