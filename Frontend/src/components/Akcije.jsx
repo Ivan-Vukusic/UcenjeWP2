@@ -1,9 +1,4 @@
-import { Row, 
-    
-    
-    
-    
-    Col, Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -12,14 +7,14 @@ export default function Akcije({ odustani, akcija }) {
     <Row className="akcije">
         <Col>
             <Link             
-            className="btn btn-danger"
+            className="btn btn-danger pomjeri"            
             to={odustani}>Odustani</Link>
         </Col>
         <Col>
-            <Button
-                className='pomjeri'
+            <Button 
+                className='pomjeri'               
                 variant="primary"
-                type="submit"
+                type="submit"                
             >
                 {akcija}
             </Button>
