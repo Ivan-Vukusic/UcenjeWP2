@@ -1,36 +1,48 @@
 import { useEffect, useState } from 'react';
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import {Button, Col, Container, Form, Modal, Row} from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import DjelatnikService from '../../services/DjelatnikService';
 import { RoutesNames } from '../../constants';
+import useError from "../../hooks/useError";
+import InputText from "../../components/InputText";
+import Akcije from "../../components/Akcije";
+import useLoading from "../../hooks/useLoading";
 
 export default function DjelatniciPromjeni(){
 
     const [djelatnik,setDjelatnik] = useState({});
     const routeParams = useParams();
     const navigate = useNavigate();
+    const { prikaziError } = useError();
+    const [prikaziModal, setPrikaziModal] = useState(false);
+    const { showLoading, hideLoading } = useLoading();
         
-    async function dohvatiDjelatnika(){        
-          const odgovor = await DjelatnikService.getBySifra('Djelatnik',routeParams.sifra)
+    async function dohvatiDjelatnika(){ 
+        showLoading();       
+        const odgovor = await DjelatnikService.getBySifra('Djelatnik',routeParams.sifra)
           if(!odgovor.ok){
               prikaziError(odgovor.podaci);
               navigate(RoutesNames.DJELATNICI_PREGLED);
               return;
           }
-          setDjelatnik(odgovor.podaci);          
+          setDjelatnik(odgovor.podaci);
+          hideLoading();          
       }
 
     useEffect(()=>{
         dohvatiDjelatnika();
     },[]);
 
-    async function promjeniDjelatnika(djelatnik){        
+    async function promjeniDjelatnika(djelatnik){
+        showLoading();        
           const odgovor = await DjelatnikService.promjeni('Djelatnik',routeParams.sifra, djelatnik);
           if(odgovor.ok){
-            navigate(RoutesNames.DJELATNICI_PREGLED);            
+            navigate(RoutesNames.DJELATNICI_PREGLED);
+            hideLoading();            
             return;
           }
-          prikaziError(odgovor.podaci);          
+          prikaziError(odgovor.podaci);
+          hideLoading();          
       }
 
     function handleSubmit(e){
@@ -47,76 +59,21 @@ export default function DjelatniciPromjeni(){
           });          
     }
 
+    function zatvoriModal(){
+        setPrikaziModal(false);
+    }
+
     return(
         
         <Container>
-            
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='ime'>
-                    <Form.Label>Ime</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.ime}
-                        name='ime'
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='prezime'>
-                    <Form.Label>Prezime</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.prezime}
-                        name='prezime'
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='brojMobitela'>
-                    <Form.Label>Broj mobitela</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.brojMobitela}
-                        name='brojMobitela'
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='oib'>
-                    <Form.Label>OIB</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.oib}
-                        name='oib'
-                        maxLength={11}
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='struka'>
-                    <Form.Label>Struka</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={djelatnik.struka}
-                        name='struka'
-                    />                    
-                </Form.Group>
-
-                <Row>
-                    <Col>
-                        <Link 
-                        className='btn btn-danger pomjeri'
-                        to={RoutesNames.DJELATNICI_PREGLED}>Odustani</Link>
-                    </Col>
-                    <Col>
-                        <Button
-                            className='pomjeri'
-                            variant='primary'
-                            type='submit'
-                        >
-                            Promjeni djelatnika
-                        </Button>
-                    </Col>
-                </Row>
-
-            </Form>
-
+           <Form onSubmit={handleSubmit}>
+                <InputText atribut='ime' vrijednost={djelatnik.ime} />
+                <InputText atribut='prezime' vrijednost={djelatnik.prezime} />
+                <InputText atribut='brojMobitela' vrijednost={djelatnik.brojMobitela} />
+                <InputText atribut='oib' vrijednost={djelatnik.oib} />
+                <InputText atribut='struka' vrijednost={djelatnik.struka} />                
+                <Akcije odustani={RoutesNames.DJELATNICI_PREGLED} akcija='Promjeni djelatnika' />
+           </Form>
         </Container>
         
     ) 

@@ -1,20 +1,26 @@
-import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
-import {  Link, useNavigate } from 'react-router-dom';
+import { Container, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { RoutesNames } from '../../constants';
 import DjelatnikService from '../../services/DjelatnikService';
+import useError from "../../hooks/useError";
+import InputText from "../../components/InputText";
+import Akcije from "../../components/Akcije";
+import useLoading from "../../hooks/useLoading";
 
 export default function DjelatniciDodaj(){
     const navigate = useNavigate();
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
 
     async function dodajDjelatnika(djelatnik){
-        
+        showLoading();
         const odgovor = await DjelatnikService.dodaj('Djelatnik', djelatnik);
         if(odgovor.ok){
           navigate(RoutesNames.DJELATNICI_PREGLED);
           return
         }
         prikaziError(odgovor.podaci);
-        
+        hideLoading();
     }
 
     function handleSubmit(e){
@@ -33,75 +39,14 @@ export default function DjelatniciDodaj(){
     return(
 
         <Container>
-            
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='ime'>
-                    <Form.Label>Ime</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='ime'
-                        placeholder='Ime djelatnika'
-                        required
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='prezime'>
-                    <Form.Label>Prezime</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='prezime'
-                        placeholder='Prezime djelatnika'
-                        required
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='brojMobitela'>
-                    <Form.Label>Broj mobitela</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='brojMobitela'
-                        placeholder='Broj mobitela djelatnika'
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='oib'>
-                    <Form.Label>OIB</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='oib'
-                        placeholder='OIB djelatnika'
-                        maxLength={11}
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='struka'>
-                    <Form.Label>Struka</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='struka'
-                        placeholder='Struka djelatnika'
-                    />                    
-                </Form.Group>
-
-                <Row>
-                    <Col>
-                        <Link 
-                        className='btn btn-danger pomjeri'
-                        to={RoutesNames.DJELATNICI_PREGLED}>Odustani</Link>
-                    </Col>
-                    <Col>
-                        <Button
-                            className='pomjeri'
-                            variant='primary'
-                            type='submit'
-                        >
-                            Dodaj djelatnika
-                        </Button>
-                    </Col>
-                </Row>
-
-            </Form>
-
+           <Form onSubmit={handleSubmit}>
+                <InputText atribut='ime' vrijednost='' placeholder='Ime djelatnika' />
+                <InputText atribut='prezime' vrijednost='' placeholder='Prezime djelatnika' />
+                <InputText atribut='brojMobitela' vrijednost='' placeholder='Broj mobitela' />
+                <InputText atribut='oib' vrijednost='' placeholder='OIB djelatnika' />
+                <InputText atribut='struka' vrijednost='' placeholder='Struka djelatnika' />                
+                <Akcije odustani={RoutesNames.DJELATNICI_PREGLED} akcija='Dodaj djelatnika' />
+           </Form>
         </Container>
 
     ) 

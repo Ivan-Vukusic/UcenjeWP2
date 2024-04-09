@@ -6,38 +6,40 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-
-
+import useError from "../../hooks/useError";
+import useLoading from "../../hooks/useLoading";
 
 export default function Djelatnici(){
 
     const [djelatnici,setDjelatnici] = useState();
-    const navigate = useNavigate();    
+    const navigate = useNavigate();
+    const { prikaziError } = useError();    
+    const { showLoading, hideLoading } = useLoading();  
 
     async function dohvatiDjelatnike(){
-        
+        showLoading();
         const odgovor = await DjelatnikService.get('Djelatnik');
         if(!odgovor.ok){
             prikaziError(odgovor.podaci);
             return;
         }
         setDjelatnici(odgovor.podaci);
-        
+        hideLoading();
+    }
+
+    async function obrisiDjelatnika(sifra){
+        showLoading();
+        const odgovor = await DjelatnikService.obrisi('Djelatnik',sifra);
+        prikaziError(odgovor.podaci);
+        if (odgovor.ok){
+            dohvatiDjelatnike();
+        }
+        hideLoading();
     }
 
     useEffect(()=>{
         dohvatiDjelatnike();
-    },[]); 
-    
-    async function obrisiDjelatnika(sifra){
-        
-        const odgovor = await DjelatnikService.obrisi('Djelatnik',sifra);
-        //prikaziError(odgovor.podaci);
-        if (odgovor.ok){
-            dohvatiDjelatnike();
-        }
-        
-    }
+    },[]);    
 
     return (
 

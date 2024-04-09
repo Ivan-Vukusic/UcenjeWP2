@@ -24,10 +24,16 @@ import Termini from "./pages/termini/Termini"
 import TerminiDodaj from "./pages/termini/TerminiDodaj"
 import TerminiPromjeni from "./pages/termini/TerminiPromjeni"
 
+import ErrorModal from './components/ErrorModal'
+import useError from "./hooks/useError"
+import LoadingSpinner from "./components/LoadingSpinner"
+
 function App() {  
-  
+  const { errors, prikaziErrorModal, sakrijError } = useError();
   return (
-    <>    
+    <> 
+    <LoadingSpinner />
+    <ErrorModal show={prikaziErrorModal} errors={errors} onHide={sakrijError} />   
     <Navbar />
     <Routes>
       <>
