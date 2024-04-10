@@ -1,30 +1,46 @@
-﻿
---use master;
+use master;
 
---go
+go
 
---drop database if exists deratizacija;
+drop database if exists deratizacija;
 
---go
+go
 
---create database deratizacija collate Croatian_CI_AS;
+create database deratizacija collate Croatian_CI_AS;
 
---go
+go
 
---use deratizacija;
+use deratizacija;
 
-SELECT name, collation_name FROM sys.databases;
-GO
+--SELECT name, collation_name FROM sys.databases;
+--GO
 
-ALTER DATABASE db_aa5999_deratizacija SET SINGLE_USER WITH
-ROLLBACK IMMEDIATE;
-GO
-ALTER DATABASE db_aa5999_deratizacija COLLATE Croatian_CI_AS;
-GO
-ALTER DATABASE db_aa5999_deratizacija SET MULTI_USER;
-GO
-SELECT name, collation_name FROM sys.databases;
-GO
+--ALTER DATABASE db_aa5999_deratizacija SET SINGLE_USER WITH
+--ROLLBACK IMMEDIATE;
+--GO
+--ALTER DATABASE db_aa5999_deratizacija COLLATE Croatian_CI_AS;
+--GO
+--ALTER DATABASE db_aa5999_deratizacija SET MULTI_USER;
+--GO
+--SELECT name, collation_name FROM sys.databases;
+--GO
+
+drop table vrste;
+drop table objekti;
+drop table djelatnici;
+drop table otrovi;
+drop table termini;
+
+
+create table operateri(
+	sifra int not null primary key identity(1,1),
+	email varchar(50) not null,
+	lozinka varchar(200) not null
+);
+
+-- Lozinka DobraPrava99 generirana pomoću https://bcrypt-generator.com/
+insert into operateri values ('ivan.vukusic@yahoo.com',
+'$2a$12$putP7MUMh2byPaSnWjBivOMRBzNI2uhhp1Krh0EeTIR3T9AJl/zUu');
 
 create table djelatnici(
 
@@ -132,15 +148,4 @@ insert into termini (datum,djelatnik,objekt,otrov,napomena) values
 
 ('2023-11-15',3,2,4,'Glodavci viđeni oko objekta. Deratizacija provedena.');
 
-
-
-select a.datum, b.ime, b.prezime, 
-c.mjesto, c.adresa, c.vrsta, d.naziv, d.kolicina, a.napomena
-
-from termini a inner join djelatnici b
-on a.djelatnik=b.sifra
-
-inner join objekti c on a.objekt=c.sifra
-
-inner join otrovi d on a.otrov=d.sifra;
 
