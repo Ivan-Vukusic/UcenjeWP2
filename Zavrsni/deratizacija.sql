@@ -30,6 +30,7 @@ drop table objekti;
 drop table djelatnici;
 drop table otrovi;
 drop table termini;
+drop table operateri;
 
 
 create table operateri(
@@ -38,7 +39,7 @@ create table operateri(
 	lozinka varchar(200) not null
 );
 
--- Lozinka DobraPrava99 generirana pomoću https://bcrypt-generator.com/
+
 insert into operateri values ('ivan.vukusic@yahoo.com',
 '$2a$12$putP7MUMh2byPaSnWjBivOMRBzNI2uhhp1Krh0EeTIR3T9AJl/zUu');
 
