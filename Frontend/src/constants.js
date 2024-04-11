@@ -25,5 +25,6 @@ export const RoutesNames = {
 };
 
 export const App = {
+    URL: 'https://korisnik117-001-site1.itempurl.com',
     DEV: true
-}
+};

@@ -33,7 +33,7 @@ export default function Login() {
           <Form.Label>Lozinka</Form.Label>
           <Form.Control type='password' name='lozinka' required />
         </Form.Group>
-        <Button variant='primary' className='gumb' type='submit'>
+        <Button variant='primary' className='gumb pomjeri' type='submit'>
           Autoriziraj
         </Button>
       </Form>

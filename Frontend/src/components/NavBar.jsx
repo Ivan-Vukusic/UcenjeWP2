@@ -54,20 +54,19 @@ function NavBar() {
             <Navbar.Collapse className="justify-content-end">
               <Nav>
                 <Nav.Link onClick={logout}>Odjava</Nav.Link>
-                <Nav.Link target='_blank' href="https://korisnik117-001-site1.itempurl.com/swagger/index.html">API Dokumentacija</Nav.Link>
+                <Nav.Link target='_blank' href={App.URL + '/swagger/index.html'}>API Dokumentacija</Nav.Link>
               </Nav>
             </Navbar.Collapse>
-
-          </>
-        ) : (
-          <>
+            </>
+           ) : (
+            <>
             <Navbar.Collapse className="justify-content-end">
               <Nav.Link onClick={() => navigate(RoutesNames.LOGIN)}>
                 Prijava
               </Nav.Link>
             </Navbar.Collapse>
-          </>
-        )}
+            </>
+         )}
       </Container>
     </Navbar>
   );

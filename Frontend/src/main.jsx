@@ -6,7 +6,7 @@ import { ErrorProvider } from './components/ErrorContext.jsx'
 import { LoadingProvider } from './components/LoadingContext.jsx'
 import { AuthProvider } from './components/AuthContext.jsx';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
