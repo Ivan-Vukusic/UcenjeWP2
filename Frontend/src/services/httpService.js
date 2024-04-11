@@ -9,6 +9,23 @@ export const httpService = axios.create({
     }
 });
 
+httpService.interceptors.request.use((config) => {
+    config.headers.Authorization = 'Bearer ' + localStorage.getItem('Bearer');
+  
+    return config;
+  });
+  
+  httpService.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response.status === 401) {
+        localStorage.setItem('Bearer', '');
+        window.location.href = '/';
+      }      
+      return Promise.reject(error);
+    }
+  );
+
 export async function get(naziv){
     return await httpService.get('/' + naziv).then((res)=>{return obradiUspjeh(res);}).catch((e)=>{ return obradiGresku(e);});
 }

@@ -21,6 +21,7 @@ export default function Djelatnici(){
         const odgovor = await DjelatnikService.get('Djelatnik');
         if(!odgovor.ok){
             prikaziError(odgovor.podaci);
+            hideLoading();
             return;
         }
         setDjelatnici(odgovor.podaci);
@@ -39,7 +40,14 @@ export default function Djelatnici(){
 
     useEffect(()=>{
         dohvatiDjelatnike();
-    },[]);    
+    },[]);  
+    
+    function slika(djelatnik){
+        if(djelatnik.slika!=null){
+            return App.URL + djelatnik.slika+ `?${Date.now()}`;
+        }
+        return nepoznato;
+    }
 
     return (
 

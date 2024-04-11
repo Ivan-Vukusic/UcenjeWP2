@@ -7,8 +7,7 @@ export const ErrorProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [prikaziErrorModal, setPrikaziErrorModal] = useState(false);
 
-  function prikaziError(errorsMessage) {
-    //console.log(errorsMessage);
+  function prikaziError(errorsMessage) {    
     setErrors(errorsMessage);
     setPrikaziErrorModal(true);
   }

@@ -19,7 +19,9 @@ export const RoutesNames = {
 
     TERMINI_PREGLED:'/termini',
     TERMINI_NOVI: '/termini/dodaj',
-    TERMINI_PROMJENI: '/termini/:sifra'
+    TERMINI_PROMJENI: '/termini/:sifra',
+
+    LOGIN: '/login'
 };
 
 export const App = {
