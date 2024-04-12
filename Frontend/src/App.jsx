@@ -28,12 +28,13 @@ import TerminiPromjeni from "./pages/termini/TerminiPromjeni"
 import ErrorModal from './components/ErrorModal'
 import useError from "./hooks/useError"
 import LoadingSpinner from "./components/LoadingSpinner"
-import useAuth from "./hooks/useAuth"
-import Login from "./pages/Login"
+//import Login from "./pages/Login"
+//import useAuth from "./hooks/useAuth"
+
 
 function App() {
   const { errors, prikaziErrorModal, sakrijError } = useError();
-  const { isLoggedIn } = useAuth();
+  //const { isLoggedIn } = useAuth();
   return (
     <>
       <LoadingSpinner />
@@ -42,7 +43,7 @@ function App() {
       <Routes>
        
           <Route path={RoutesNames.HOME} element={<Pocetna />} />
-          {isLoggedIn ? (
+          {/*isLoggedIn ? (*/}
             <>
               <Route path={RoutesNames.DJELATNICI_PREGLED} element={<Djelatnici />} />
               <Route path={RoutesNames.DJELATNICI_NOVI} element={<DjelatniciDodaj />} />
@@ -64,11 +65,11 @@ function App() {
               <Route path={RoutesNames.TERMINI_NOVI} element={<TerminiDodaj />} />
               <Route path={RoutesNames.TERMINI_PROMJENI} element={<TerminiPromjeni />} />
             </>
-          ) : (
-            <>
-              <Route path={RoutesNames.LOGIN} element={<Login />} />
-            </>
-         )}
+          {/*) : (*/}
+           {/* <> */}
+             {/* <Route path={RoutesNames.LOGIN} element={<Login />} /> */}
+           {/* </> */}
+       {/* )}*/}
        </Routes>
      </>
   )

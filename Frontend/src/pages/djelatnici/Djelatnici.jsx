@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Row, Col, Card } from "react-bootstrap";
 import DjelatnikService from "../../services/DjelatnikService";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
+import slika1 from '../assets/images/slika1.jpg';
 import useError from "../../hooks/useError";
 import useLoading from "../../hooks/useLoading";
 
@@ -46,7 +47,7 @@ export default function Djelatnici(){
         if(djelatnik.slika!=null){
             return App.URL + djelatnik.slika+ `?${Date.now()}`;
         }
-        return nepoznato;
+        return slika1;
     }
 
     return (
@@ -99,6 +100,33 @@ export default function Djelatnici(){
                     ))}
                 </tbody>
             </Table>
+           
+            <Row>
+                
+            { djelatnici && djelatnici.map((d) => (
+           
+           <Col key={d.sifra} sm={12} lg={3} md={3}>
+              <Card style={{ marginTop: '1rem' }}>
+              <Card.Img variant="top" src={slika(d)} className="slika"/>
+                <Card.Body>
+                  <Card.Title>{d.ime} {d.prezime}</Card.Title>
+                  <Card.Text>
+                    {d.struka}
+                  </Card.Text>
+                  <Row>
+                      <Col>
+                      <Link className="btn btn-primary gumb" to={`/djelatnici/${d.sifra}`}><FaEdit /></Link>
+                      </Col>
+                      <Col>
+                      <Button variant="danger" className="gumb"  onClick={() => obrisiDjelatnika(d.sifra)}><FaTrash /></Button>
+                      </Col>
+                    </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+      }
+      </Row>
         </Container>
 
     );
