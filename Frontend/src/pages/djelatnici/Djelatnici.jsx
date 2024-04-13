@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import DjelatnikService from "../../services/DjelatnikService";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import slika2 from "../../assets/images/slika2.png"
 import useError from "../../hooks/useError";
@@ -12,8 +12,7 @@ import useLoading from "../../hooks/useLoading";
 
 export default function Djelatnici() {
 
-    const [djelatnici, setDjelatnici] = useState();
-    const navigate = useNavigate();
+    const [djelatnici, setDjelatnici] = useState();    
     const { prikaziError } = useError();
     const { showLoading, hideLoading } = useLoading();
 

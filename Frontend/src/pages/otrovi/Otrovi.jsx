@@ -6,35 +6,42 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
+import useError from "../../hooks/useError";
+import useLoading from "../../hooks/useLoading";
 
 
 export default function Otrovi(){
 
     const [otrovi,setOtrovi] = useState();
     const navigate = useNavigate();
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
 
     async function dohvatiOtrove(){
-        await OtrovService.getOtrovi()
-        .then((res)=>{
-            setOtrovi(res.data);
-        })
-        .catch((e)=>{
-            alert(e); 
-        });
+        showLoading();
+        const odgovor = await OtrovService.get('Otrov');
+        if (!odgovor.ok) {
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setOtrovi(odgovor.podaci);
+        hideLoading();
+    }    
+    
+    async function obrisiOtrov(sifra){
+        showLoading();
+        const odgovor = await OtrovService.obrisi('Otrov', sifra);
+        prikaziError(odgovor.podaci);
+        if (odgovor.ok) {
+            dohvatiOtrove();
+        }
+        hideLoading();        
     }
 
     useEffect(()=>{
         dohvatiOtrove();
     },[]); 
-    
-    async function obrisiOtrov(sifra){
-        const odgovor = await OtrovService.obrisiOtrov(sifra);
-        if(odgovor.ok){
-            alert(odgovor.poruka.data.poruka);
-            dohvatiOtrove();
-        }
-        
-    }
 
     return (
 

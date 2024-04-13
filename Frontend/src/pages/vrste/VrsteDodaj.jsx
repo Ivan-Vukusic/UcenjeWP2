@@ -2,19 +2,26 @@ import { Button, Col, Container, Form, Row, } from 'react-bootstrap';
 import {  Link, useNavigate } from 'react-router-dom';
 import { RoutesNames } from '../../constants';
 import VrstaService from '../../services/VrstaService';
+import useError from "../../hooks/useError";
+import InputText from "../../components/InputText";
+import Akcije from "../../components/Akcije";
+import useLoading from "../../hooks/useLoading";
 
 export default function VrsteDodaj(){
+
     const navigate = useNavigate();
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
 
     async function dodajVrstu(vrsta){
-        
+        showLoading();
         const odgovor = await VrstaService.dodaj('Vrsta', vrsta);
         if(odgovor.ok){
           navigate(RoutesNames.VRSTE_PREGLED);
           return
         }
         prikaziError(odgovor.podaci);
-        
+        hideLoading();
     }
 
     function handleSubmit(e){
@@ -30,38 +37,10 @@ export default function VrsteDodaj(){
     return(
 
         <Container>
-            
-            <Form onSubmit={handleSubmit}>
-
-                <Form.Group controlId='naziv'>
-                    <Form.Label>Naziv</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='naziv'
-                        placeholder='Naziv vrste objekta'
-                        required
-                    />                    
-                </Form.Group>
-
-                <Row>
-                    <Col>
-                        <Link 
-                        className='btn btn-danger pomjeri'
-                        to={RoutesNames.VRSTE_PREGLED}>Odustani</Link>
-                    </Col>
-                    <Col>
-                        <Button
-                            className='pomjeri'
-                            variant='primary'
-                            type='submit'
-                        >
-                            Dodaj vrstu objekta
-                        </Button>
-                    </Col>
-                </Row>
-
-            </Form>
-
+           <Form onSubmit={handleSubmit}>
+                <InputText atribut='naziv' vrijednost='' placeholder='Naziv vrste objekta' />                
+                <Akcije odustani={RoutesNames.VRSTE_PREGLED} akcija='Dodaj vrstu' />
+           </Form>
         </Container>
 
     ) 

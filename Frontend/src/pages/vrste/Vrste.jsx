@@ -6,37 +6,42 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import VrstaService from "../../services/VrstaService";
-
+import useError from "../../hooks/useError";
+import useLoading from "../../hooks/useLoading";
 
 export default function Vrste(){
 
     const [vrste,setVrste] = useState();
     const navigate = useNavigate();
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
 
     async function dohvatiVrste(){
-        
+        showLoading();
         const odgovor = await VrstaService.get('Vrsta');
         if(!odgovor.ok){
             prikaziError(odgovor.podaci);
+            hideLoading();
             return;
         }
         setVrste(odgovor.podaci);
+        hideLoading();
         
+    }
+
+    async function obrisiVrstu(sifra){
+        showLoading();
+        const odgovor = await VrstaService.obrisi('Vrsta', sifra);
+        prikaziError(odgovor.podaci);
+        if (odgovor.ok){
+            dohvatiVrste();
+        }
+        hideLoading();
     }
 
     useEffect(()=>{
         dohvatiVrste();
-    },[]); 
-    
-    async function obrisiVrstu(sifra){
-        
-        const odgovor = await VrstaService.obrisi('Vrsta',sifra);
-        //prikaziError(odgovor.podaci);
-        if (odgovor.ok){
-            dohvatiVrste();
-        }
-        
-    }
+    },[]);     
 
     return (
 

@@ -8,6 +8,7 @@ import Akcije from "../../components/Akcije";
 import useLoading from "../../hooks/useLoading";
 
 export default function DjelatniciDodaj(){
+    
     const navigate = useNavigate();
     const { prikaziError } = useError();
     const { showLoading, hideLoading } = useLoading();
@@ -32,7 +33,8 @@ export default function DjelatniciDodaj(){
             prezime: podaci.get('prezime'),
             brojMobitela: podaci.get('brojMobitela'),
             oib: podaci.get('oib'),
-            struka: podaci.get('struka')
+            struka: podaci.get('struka'),
+            slika: '' 
           });
     }
 

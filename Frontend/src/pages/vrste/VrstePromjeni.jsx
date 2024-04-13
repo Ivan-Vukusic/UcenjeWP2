@@ -3,34 +3,45 @@ import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import VrstaService from '../../services/VrstaService';
 import { RoutesNames } from '../../constants';
+import useError from "../../hooks/useError";
+import useLoading from "../../hooks/useLoading";
+import InputText from "../../components/InputText";
+import Akcije from "../../components/Akcije";
 
 export default function VrstePromjeni(){
 
     const [vrsta,setVrstu] = useState({});
     const routeParams = useParams();
     const navigate = useNavigate();
+    const { prikaziError } = useError();    
+    const { showLoading, hideLoading } = useLoading();
         
-    async function dohvatiVrstu(){        
+    async function dohvatiVrstu(){ 
+        showLoading();       
         const odgovor = await VrstaService.getBySifra('Vrsta',routeParams.sifra)
         if(!odgovor.ok){
-            //prikaziError(odgovor.podaci);
-            navigate(RoutesNames.VRSTE_PREGLED);
+            hideLoading();
+            prikaziError(odgovor.podaci);              
             return;
         }
-        setVrstu(odgovor.podaci);          
+        setVrstu(odgovor.podaci);
+        hideLoading();          
     }
 
   useEffect(()=>{
       dohvatiVrstu();
   },[]);
 
-  async function promjeniVrstu(vrsta){        
+  async function promjeniVrstu(vrsta){ 
+        showLoading();       
         const odgovor = await VrstaService.promjeni('Vrsta',routeParams.sifra, vrsta);
         if(odgovor.ok){
+          hideLoading();
           navigate(RoutesNames.VRSTE_PREGLED);            
           return;
         }
-        prikaziError(odgovor.podaci);          
+        alert(dohvatiPorukeAlert(odgovor.podaci));
+        hideLoading();          
     }
 
     function handleSubmit(e){
@@ -47,36 +58,10 @@ export default function VrstePromjeni(){
         
         <Container>
             
-            <Form onSubmit={handleSubmit}>
-
-                <Form.Group controlId='naziv'>
-                    <Form.Label>Naziv</Form.Label>
-                    <Form.Control
-                        type='text'
-                        defaultValue={vrsta.naziv}
-                        name='naziv'                        
-                        required
-                    />                    
-                </Form.Group>
-
-                <Row>
-                    <Col>
-                        <Link 
-                        className='btn btn-danger pomjeri'
-                        to={RoutesNames.VRSTE_PREGLED}>Odustani</Link>
-                    </Col>
-                    <Col>
-                        <Button
-                            className='pomjeri'
-                            variant='primary'
-                            type='submit'
-                        >
-                            Promjeni vrstu objekta
-                        </Button>
-                    </Col>
-                </Row>
-
-            </Form>
+          <Form onSubmit={handleSubmit}>
+          <InputText atribut='naziv' vrijednost={vrsta.naziv} />                                    
+          <Akcije odustani={RoutesNames.VRSTE_PREGLED} akcija='Promjeni vrstu objekta' />
+          </Form>
 
         </Container>
         
