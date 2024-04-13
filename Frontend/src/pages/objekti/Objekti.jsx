@@ -1,42 +1,54 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Modal, Table } from "react-bootstrap";
 import { BsBuildingAdd } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 import ObjektService from "../../services/ObjektService";
 import { RoutesNames } from "../../constants";
-
+import useError from "../../hooks/useError";
+import useLoading from "../../hooks/useLoading";
 
 export default function Objekti(){
+
     const [objekti,setObjekti] = useState();
-    let navigate = useNavigate(); 
+    let navigate = useNavigate();
+    const [prikaziModal, setPrikaziModal] = useState(false); 
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
 
     async function dohvatiObjekte(){
-        await ObjektService.get()
-        .then((res)=>{
-            setObjekti(res.data);
-        })       
-        .catch((e)=>{
-            alert(e);
-        });
+        showLoading();
+        const odgovor = await ObjektService.get('Objekt');
+        if(!odgovor.ok){
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setObjekti(odgovor.podaci);
+        hideLoading();
+    }
+
+    async function obrisiObjekt(sifra) {
+        showLoading();
+        const odgovor = await ObjektService.obrisi('Objekt', sifra);
+        hideLoading();             
+        if (odgovor.ok){
+            dohvatiObjekte();
+            setPrikaziModal(true);
+        } else {
+            prikaziError(odgovor.podaci); 
+        }
+    }
+
+    function zatvoriModal(){
+        setPrikaziModal(false);
     }
 
     useEffect(()=>{
         dohvatiObjekte();
-    },[]);
-
-    async function obrisiObjekt(sifra) {
-        const odgovor = await ObjektService.obrisi(sifra);
-    
-        if (odgovor.ok) {
-            dohvatiObjekte();
-        } else {
-          alert(odgovor.poruka);
-        }
-      }        
+    },[]);         
 
     return (
 
@@ -85,6 +97,15 @@ export default function Objekti(){
                     ))}
                 </tbody>
             </Table>
+            <Modal show={prikaziModal} onHide={() => setPrikaziModal(false)}> 
+                <Modal.Header closeButton>
+                    <Modal.Title>Uspješno</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Objekt je uspješno obrisan.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setPrikaziModal(false)}>Zatvori</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
 
     );

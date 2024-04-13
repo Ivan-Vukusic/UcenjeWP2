@@ -25,8 +25,7 @@ export default function Vrste(){
             return;
         }
         setVrste(odgovor.podaci);
-        hideLoading();
-        
+        hideLoading();        
     }
 
     async function obrisiVrstu(sifra){

@@ -1,44 +1,54 @@
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Container, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-import Service from '../../services/ObjektService';
+import ObjektService from '../../services/ObjektService';
 import VrstaService from '../../services/VrstaService';
 import { RoutesNames } from '../../constants';
-
-
+import useError from "../../hooks/useError";
+import InputText from "../../components/InputText";
+import Akcije from "../../components/Akcije";
+import useLoading from "../../hooks/useLoading";
 
 export default function ObjektiDodaj() {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [vrste, setVrste] = useState([]);  
   const [vrstaSifra, setVrstaSifra] = useState(0);
+  const { prikaziError } = useError();
+  const { showLoading, hideLoading } = useLoading();
 
   async function dohvatiVrste(){
-    await VrstaService.getVrste().
-      then((odgovor)=>{
-        setVrste(odgovor.data);
-        setVrstaSifra(odgovor.data[0].sifra);
-      });
-  } 
+    showLoading();
+    const odgovor = await VrstaService.get('Vrsta');
+    if(!odgovor.ok){
+        prikaziError(odgovor.podaci);
+        hideLoading();
+        return;
+    }
+    setVrste(odgovor.podaci);
+    setVrstaSifra(odgovor.podaci[0].sifra);
+    hideLoading();        
+}
 
   async function ucitaj(){
-    await dohvatiVrste();    
+    showLoading();
+    await dohvatiVrste();
+    hideLoading();    
   }
 
   useEffect(()=>{
     ucitaj();
   },[]);
 
-  async function dodaj(e) {    
-
-    const odgovor = await Service.dodaj(e);
-    if (odgovor.ok) {
+  async function dodaj(objekt) {
+    showLoading();
+    const odgovor = await ObjektService.dodaj('Objekt', objekt);
+    hideLoading();
+    if(odgovor.ok){
       navigate(RoutesNames.OBJEKTI_PREGLED);
-    } else {
-      alert(odgovor.poruka.errors);
+      return
     }
-    
+    prikaziError(odgovor.podaci); 
   }
 
   function handleSubmit(e){
@@ -60,26 +70,9 @@ export default function ObjektiDodaj() {
     <Container>
             
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='mjesto'>
-                    <Form.Label>Mjesto</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='mjesto'
-                        placeholder='Mjesto'
-                        required
-                    />                    
-                </Form.Group>
-
-                <Form.Group controlId='adresa'>
-                    <Form.Label>Adresa</Form.Label>
-                    <Form.Control
-                        type='text'
-                        name='adresa'
-                        placeholder='Adresa'
-                        required
-                    />                    
-                </Form.Group>
-
+                
+              <InputText atribut='mjesto' vrijednost='' placeholder='Mjesto' />
+              <InputText atribut='adresa' vrijednost='' placeholder='Adresa objekta' />
                 <Form.Group controlId='vrsta'>
                     <Form.Label>Vrsta</Form.Label>
                         <Form.Select 
@@ -91,29 +84,11 @@ export default function ObjektiDodaj() {
                         </option>
                         ))}
                     </Form.Select>                    
-                </Form.Group>                
-
-                <Row>
-                    <Col>
-                        <Link 
-                        className='btn btn-danger pomjeri'
-                        to={RoutesNames.OBJEKTI_PREGLED}>Odustani</Link>
-                    </Col>
-                    <Col>
-                        <Button
-                            className='pomjeri'
-                            variant='primary'
-                            type='submit'
-                        >
-                            Dodaj objekt
-                        </Button>
-                    </Col>
-                </Row>
-
+                </Form.Group> 
+                
+                <Akcije odustani={RoutesNames.OBJEKTI_PREGLED} akcija='Dodaj objekt' />
             </Form>
 
-        </Container>   
-
-       
+        </Container>        
   );
 }
