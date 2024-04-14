@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Form } from "react-bootstrap";
 import TerminService from "../../services/TerminService";
 import DjelatnikService from "../../services/DjelatnikService";
 import ObjektService from "../../services/ObjektService";
 import OtrovService from "../../services/OtrovService";
 import { RoutesNames } from "../../constants";
+import useError from '../../hooks/useError';
+import InputText from '../../components/InputText';
+import Akcije from '../../components/Akcije';
+import useLoading from '../../hooks/useLoading';
 
 
+export default function TerminiPromjeni() {
 
-export default function TerminiPromjeni(){
-        
     const routeParams = useParams();
     const navigate = useNavigate();
     const [termin, setTermin] = useState({});
@@ -25,161 +27,164 @@ export default function TerminiPromjeni(){
     const [otrovi, setOtrovi] = useState([]);
     const [otrovSifra, setOtrovSifra] = useState(0);
 
-    async function get(){
-        await TerminService.getBySifra(routeParams.sifra)
-        .then((res)=>{
-            setTermin(res.data)
-        })
-        .catch((e)=>{
-            alert(e.poruka);            
-        })
+    const { prikaziError } = useError();
+    const { showLoading, hideLoading } = useLoading();
+
+    async function dohvatiTermin() {
+        showLoading();
+        const odgovor = await TerminService.getBySifra('Termin', routeParams.sifra);
+        if (!odgovor.ok) {
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setTermin(odgovor.podaci);
+        setDjelatnikSifra(odgovor.podaci.djelatnikSifra);
+        setObjektSifra(odgovor.podaci.objektSifra);
+        setOtrovSifra(odgovor.podaci.otrovSifra);
+        hideLoading();
     }
 
-    async function dohvatiDjelatnike(){
-        await DjelatnikService.getDjelatnici().
-          then((odgovor)=>{
-            setDjelatnici(odgovor.data);
-            setDjelatnikSifra(odgovor.data[0].sifra);
-          });
+    async function dohvatiDjelatnike() {
+        showLoading();
+        const odgovor = await DjelatnikService.get('Djelatnik');
+        if (!odgovor.ok) {
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setDjelatnici(odgovor.podaci);
+        setDjelatnikSifra(odgovor.podaci[0].sifra);
+        hideLoading();
     }
 
-    async function dohvatiObjekte(){
-        await ObjektService.get().
-          then((odgovor)=>{
-            setObjekti(odgovor.data);
-            setObjektSifra(odgovor.data[0].sifra);
-          });
+    async function dohvatiObjekte() {
+        showLoading();
+        const odgovor = await ObjektService.get('Objekt');
+        if (!odgovor.ok) {
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setObjekti(odgovor.podaci);
+        setObjektSifra(odgovor.podaci[0].sifra);
+        hideLoading();
     }
 
-    async function dohvatiOtrove(){
-        await OtrovService.getOtrovi().
-          then((odgovor)=>{
-            setOtrovi(odgovor.data);
-            setOtrovSifra(odgovor.data[0].sifra);
-          });
+    async function dohvatiOtrove() {
+        showLoading();
+        const odgovor = await OtrovService.get('Otrov');
+        if (!odgovor.ok) {
+            prikaziError(odgovor.podaci);
+            hideLoading();
+            return;
+        }
+        setOtrovi(odgovor.podaci);
+        setOtrovSifra(odgovor.podaci[0].sifra);
+        hideLoading();
     }
 
-    async function ucitaj(){
-        await get();
+    async function ucitaj() {
+        showLoading();
+        await dohvatiTermin();
         await dohvatiDjelatnike();
         await dohvatiObjekte();
         await dohvatiOtrove();
+        hideLoading();
     }
-    
-    useEffect(()=>{
-        ucitaj();
-    },[]);
 
-    async function promjeni(termin){
-        const odgovor = await TerminService.promjeni(routeParams.sifra, termin);
-        if (odgovor.ok){
+    useEffect(() => {
+        ucitaj();
+    }, []);
+
+    async function promjeni(termin) {
+        showLoading();
+        const odgovor = await TerminService.promjeni('Termin', routeParams.sifra, termin);
+        if (odgovor.ok) {
+            hideLoading();
             navigate(RoutesNames.TERMINI_PREGLED);
-          }else{
-            console.log(odgovor);
-            alert(odgovor.poruka);
-          }
+            return;
+        }
+        prikaziError(odgovor.podaci);
+        hideLoading();
     }
-    
+
     function handleSubmit(e) {
         e.preventDefault();
-    
-        const podaci = new FormData(e.target);                
-    
+
+        const podaci = new FormData(e.target);
+
         promjeni({
-          datum: podaci.get('datum'),          
-          djelatnikSifra: parseInt(djelatnikSifra),
-          objektSifra: parseInt(objektSifra),
-          otrovSifra: parseInt(otrovSifra),
-          napomena: podaci.get('napomena')
-        });        
-      }
-    
-      return (
+            datum: podaci.get('datum'),
+            djelatnikSifra: parseInt(djelatnikSifra),
+            objektSifra: parseInt(objektSifra),
+            otrovSifra: parseInt(otrovSifra),
+            napomena: podaci.get('napomena')
+        });
+    }
 
-      <Container>
-            
-      <Form onSubmit={handleSubmit}>
-        
-          <Form.Group controlId='datum'>
-              <Form.Label>Datum</Form.Label>
-              <Form.Control
-                  type='date'
-                  name='datum'
-                  defaultValue={termin.datum}                                    
-                  required
-              />                    
-          </Form.Group>            
+    return (
 
-          <Form.Group controlId='djelatnik'>
-              <Form.Label>Djelatnik</Form.Label>
-                  <Form.Select 
-                  onChange={(e) => {setDjelatnikSifra(e.target.value)}}
-                  >                                            
-                  {djelatnici && djelatnici.map((d,index)=>(
-                  <option key={index} value={d.sifra}>
-                  {d.ime} {d.prezime}
-                  </option>
-                  ))}
-              </Form.Select>                    
-          </Form.Group>                
+        <Container>
 
-          <Form.Group controlId='objekt'>
-              <Form.Label>Objekt</Form.Label>
-                  <Form.Select 
-                  onChange={(e) => {setObjektSifra(e.target.value)}}
-                  >                                            
-                  {objekti && objekti.map((o,index)=>(
-                  <option key={index} value={o.sifra}>
-                  {o.mjesto}, {o.adresa}
-                  </option>
-                  ))}
-              </Form.Select>                    
-          </Form.Group>   
+            <Form onSubmit={handleSubmit}>
 
-          <Form.Group controlId='otrov'>
-              <Form.Label>Otrov</Form.Label>
-                  <Form.Select 
-                  onChange={(e) => {setOtrovSifra(e.target.value)}}
-                  >                                            
-                  {otrovi && otrovi.map((o,index)=>(
-                  <option key={index} value={o.sifra}>
-                  {o.naziv} 
-                  </option>
-                  ))}
-              </Form.Select>                    
-          </Form.Group>  
+                <Form.Group controlId='datum'>
+                    <Form.Label>Datum</Form.Label>
+                    <Form.Control
+                        type='date'
+                        name='datum'
+                    />
+                </Form.Group>
 
-          <Form.Group controlId='napomena'>
-          <Form.Label>Napomena</Form.Label>
-          <Form.Control
-            type='text'
-            name='napomena'
-            defaultValue={termin.napomena}
-          />
-        </Form.Group>                           
+                <Form.Group controlId='djelatnik'>
+                    <Form.Label>Djelatnik</Form.Label>
+                    <Form.Select
+                        onChange={(e) => { setDjelatnikSifra(e.target.value) }}
+                    >
+                        {djelatnici && djelatnici.map((d, index) => (
+                            <option key={index} value={d.sifra}>
+                                {d.ime} {d.prezime}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
 
-          <Row>
-              <Col>
-                  <Link 
-                  className='btn btn-danger pomjeri'
-                  to={RoutesNames.TERMINI_PREGLED}>Odustani</Link>
-              </Col>
-              <Col>
-                  <Button
-                      className='pomjeri'
-                      variant='primary'
-                      type='submit'
-                  >
-                      Promjeni termin
-                  </Button>
-              </Col>
-          </Row>
+                <Form.Group controlId='objekt'>
+                    <Form.Label>Objekt</Form.Label>
+                    <Form.Select
+                        onChange={(e) => { setObjektSifra(e.target.value) }}
+                    >
+                        {objekti && objekti.map((o, index) => (
+                            <option key={index} value={o.sifra}>
+                                {o.mjesto}, {o.adresa}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
 
-      </Form>
+                <Form.Group controlId='otrov'>
+                    <Form.Label>Otrov</Form.Label>
+                    <Form.Select
+                        onChange={(e) => { setOtrovSifra(e.target.value) }}
+                    >
+                        {otrovi && otrovi.map((o, index) => (
+                            <option key={index} value={o.sifra}>
+                                {o.naziv}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
 
-  </Container>   
+                <InputText atribut='napomena' vrijednost={termin.napomena} />
 
- 
-);
+                <Akcije odustani={RoutesNames.TERMINI_PREGLED} akcija='Promjeni termin' />
+
+            </Form>
+
+        </Container>
+
+
+    );
 
 }

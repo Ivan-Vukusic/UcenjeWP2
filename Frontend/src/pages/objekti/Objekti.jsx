@@ -97,13 +97,13 @@ export default function Objekti(){
                     ))}
                 </tbody>
             </Table>
-            <Modal show={prikaziModal} onHide={() => setPrikaziModal(false)}> 
+            <Modal show={prikaziModal} onHide={zatvoriModal}> 
                 <Modal.Header closeButton>
                     <Modal.Title>Uspješno</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Objekt je uspješno obrisan.</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setPrikaziModal(false)}>Zatvori</Button>
+                    <Button variant='secondary' onClick={zatvoriModal}>Zatvori</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
