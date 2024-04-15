@@ -42,11 +42,11 @@ export default function DjelatniciDodaj(){
 
         <Container>
            <Form onSubmit={handleSubmit}>
-                <InputText atribut='ime' vrijednost='' placeholder='Ime djelatnika' />
-                <InputText atribut='prezime' vrijednost='' placeholder='Prezime djelatnika' />
-                <InputText atribut='brojMobitela' vrijednost='' placeholder='Broj mobitela' />
-                <InputText atribut='oib' vrijednost='' placeholder='OIB djelatnika' />
-                <InputText atribut='struka' vrijednost='' placeholder='Struka djelatnika' />                
+                <InputText atribut='Ime djelatnika' vrijednost=''  />
+                <InputText atribut='Prezime djelatnika' vrijednost=''  />
+                <InputText atribut='Broj mobitela' vrijednost=''  />
+                <InputText atribut='OIB djelatnika' vrijednost=''  />
+                <InputText atribut='Struka djelatnika' vrijednost=''  />                
                 <Akcije odustani={RoutesNames.DJELATNICI_PREGLED} akcija='Dodaj djelatnika' />
            </Form>
         </Container>

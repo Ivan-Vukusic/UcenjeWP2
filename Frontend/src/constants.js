@@ -1,6 +1,8 @@
 export const RoutesNames = {
     HOME: '/',
 
+    DIJAGRAM: '/dijagram',
+
     DJELATNICI_PREGLED: '/djelatnici',
     DJELATNICI_NOVI: '/djelatnici/dodaj',
     DJELATNICI_PROMJENI: '/djelatnici/:sifra',
@@ -25,6 +27,6 @@ export const RoutesNames = {
 };
 
 export const App = {
-    URL: 'https://korisnik117-001-site1.itempurl.com',
+    URL: 'https://localhost:7137',
     DEV: true
 };

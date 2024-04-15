@@ -62,10 +62,10 @@ export default function OtroviPromjeni(){
         <Container>
             
           <Form onSubmit={handleSubmit}>
-          <InputText atribut='naziv' vrijednost={otrov.naziv} />
-          <InputText atribut='aktivnaTvar' vrijednost={otrov.aktivnaTvar} />
-          <InputText atribut='kolicina' vrijednost={otrov.kolicina} />
-          <InputText atribut='casBroj' vrijednost={otrov.casBroj} />                          
+          <InputText atribut='Naziv otrova' vrijednost={otrov.naziv} />
+          <InputText atribut='Aktivna tvar u otrovu' vrijednost={otrov.aktivnaTvar} />
+          <InputText atribut='Količina otrova' vrijednost={otrov.kolicina} />
+          <InputText atribut='CAS broj' vrijednost={otrov.casBroj} />                          
           <Akcije odustani={RoutesNames.OTROVI_PREGLED} akcija='Promjeni otrov' />
           </Form>
 

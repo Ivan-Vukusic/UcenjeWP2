@@ -176,7 +176,14 @@ export default function TerminiPromjeni() {
                     </Form.Select>
                 </Form.Group>
 
-                <InputText atribut='napomena' vrijednost={termin.napomena} />
+                <Form.Group controlId='napomena'>
+                    <Form.Label>Napomena</Form.Label>
+                    <Form.Control
+                        type='text'
+                        defaultValue={termin.napomena}
+                        name='napomena'
+                    />
+                </Form.Group>
 
                 <Akcije odustani={RoutesNames.TERMINI_PREGLED} akcija='Promjeni termin' />
 

@@ -38,7 +38,7 @@ export default function VrsteDodaj(){
 
         <Container>
            <Form onSubmit={handleSubmit}>
-                <InputText atribut='naziv' vrijednost='' placeholder='Naziv vrste objekta' />                
+                <InputText atribut='Naziv vrste objekta' vrijednost='' />                
                 <Akcije odustani={RoutesNames.VRSTE_PREGLED} akcija='Dodaj vrstu' />
            </Form>
         </Container>

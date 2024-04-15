@@ -59,7 +59,7 @@ export default function VrstePromjeni(){
         <Container>
             
           <Form onSubmit={handleSubmit}>
-          <InputText atribut='naziv' vrijednost={vrsta.naziv} />                                    
+          <InputText atribut='Naziv vrste objekta' vrijednost={vrsta.naziv} />                                    
           <Akcije odustani={RoutesNames.VRSTE_PREGLED} akcija='Promjeni vrstu objekta' />
           </Form>
 

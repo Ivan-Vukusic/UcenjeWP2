@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { RoutesNames, App } from '../constants';
 
 import './NavBar.css';
-//import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 
 function NavBar() {
 
   const navigate = useNavigate();
-  //const { logout, isLoggedIn } = useAuth();
+  const { logout, isLoggedIn } = useAuth();
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -23,7 +23,7 @@ function NavBar() {
           Deratizacija APP
         </Navbar.Brand>
 
-       {/* {isLoggedIn ? ( */} 
+        {isLoggedIn ? (  
         <>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -66,12 +66,12 @@ function NavBar() {
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav>
-              {/* <Nav.Link onClick={logout}>Odjava</Nav.Link> */} 
-              <Nav.Link target='_blank' href={App.URL + '/swagger/index.html'}>API Dokumentacija</Nav.Link>
+               <Nav.Link onClick={logout}>Odjava</Nav.Link>  
+              <Nav.Link target='_blank' href={'https://localhost:7137/swagger/index.html'}>API Dokumentacija</Nav.Link>
             </Nav>
           </Navbar.Collapse>
            </> 
-          {/* ) : ( */}
+           ) : ( 
           <>
             <Navbar.Collapse className="justify-content-end">
               <Nav.Link onClick={() => navigate(RoutesNames.LOGIN)}>
@@ -79,7 +79,7 @@ function NavBar() {
               </Nav.Link>
             </Navbar.Collapse>
           </>
-         {/*  )} */}
+           )} 
       </Container>
     </Navbar>
   );

@@ -156,7 +156,14 @@ export default function TerminiDodaj() {
           </Form.Select>
         </Form.Group>
 
-        <InputText atribut='napomena' vrijednost='' placeholder='Napomena' />
+        <Form.Group controlId='napomena'>
+          <Form.Label>Napomena</Form.Label>
+          <Form.Control
+            type='text'
+            name='napomena'
+            maxLength={255}
+          />
+        </Form.Group>
 
         <Akcije odustani={RoutesNames.TERMINI_PREGLED} akcija='Dodaj termin' />
 

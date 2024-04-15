@@ -1,14 +1,13 @@
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-export default function InputText({ atribut, vrijednost, placeholder }) {
+export default function InputText({ atribut, vrijednost }) {
   return (
     <Form.Group>
         <Form.Label className='labelaAtributa'>{atribut}</Form.Label>
         <Form.Control
             name={atribut}
-            defaultValue={vrijednost}
-            placeholder={placeholder}
+            defaultValue={vrijednost}            
         />
     </Form.Group>
   );

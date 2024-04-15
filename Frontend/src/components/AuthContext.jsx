@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem('Bearer', odgovor.podaci);
       setAuthToken(odgovor.podaci);
       setIsLoggedIn(true);
-      navigate(RoutesNames.HOME);
+      navigate(RoutesNames.DIJAGRAM);
     } else {
       console.log()
       prikaziError(odgovor.podaci);

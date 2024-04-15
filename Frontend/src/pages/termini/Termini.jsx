@@ -82,7 +82,7 @@ export default function Termini(){
                             <td className="sredina">{entitet.djelatnikImePrezime}</td>
                             <td className="sredina">{entitet.objektMjestoAdresa}</td>
                             <td className="sredina">{entitet.otrovNaziv}</td>
-                            <td className="sredina">
+                            <td className="sredina">                            
                             {entitet.napomena == null || entitet.napomena.trim() == '' ? 'Nema napomene' : entitet.napomena}
                                 </td>
                             
