@@ -27,6 +27,6 @@ export const RoutesNames = {
 };
 
 export const App = {
-    URL: 'https://korisnik117-001-site1.itempurl.com',
+    URL: 'https://deratizacija.runasp.net',
     DEV: false
 };
