@@ -118,11 +118,11 @@ export default function DjelatniciPromjeni(){
        <Row>
         <Col key='1' sm={12} lg={6} md={6}>
           <Form onSubmit={handleSubmit}>
-          <InputText atribut='Ime djelatnika' vrijednost={djelatnik.ime} />
-          <InputText atribut='Prezime djelatnika' vrijednost={djelatnik.prezime} />
-          <InputText atribut='Broj mobitela' vrijednost={djelatnik.brojMobitela} />
-          <InputText atribut='OIB djelatnika' vrijednost={djelatnik.oib} />
-          <InputText atribut='Struka djelatnika' vrijednost={djelatnik.struka} />                
+          <InputText atribut='ime' vrijednost={djelatnik.ime} />
+          <InputText atribut='prezime' vrijednost={djelatnik.prezime} />
+          <InputText atribut='brojMobitela' vrijednost={djelatnik.brojMobitela} />
+          <InputText atribut='oib' vrijednost={djelatnik.oib} />
+          <InputText atribut='struka' vrijednost={djelatnik.struka} />                
           <Akcije odustani={RoutesNames.DJELATNICI_PREGLED} akcija='Promjeni djelatnika' />
           </Form>
           <Row>

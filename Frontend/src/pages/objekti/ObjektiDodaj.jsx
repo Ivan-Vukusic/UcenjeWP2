@@ -71,8 +71,8 @@ export default function ObjektiDodaj() {
             
             <Form onSubmit={handleSubmit}>
                 
-              <InputText atribut='Mjesto' vrijednost=''  />
-              <InputText atribut='Adresa' vrijednost=''  />
+              <InputText atribut='mjesto' vrijednost=''  />
+              <InputText atribut='adresa' vrijednost=''  />
                 <Form.Group controlId='vrsta'>
                     <Form.Label>Vrsta objekta</Form.Label>
                         <Form.Select 

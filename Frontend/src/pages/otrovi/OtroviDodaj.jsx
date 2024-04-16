@@ -40,10 +40,10 @@ export default function OtroviDodaj(){
 
         <Container>
            <Form onSubmit={handleSubmit}>
-                <InputText atribut='Naziv otrova' vrijednost=''  />
-                <InputText atribut='Aktivna tvar u otrovu' vrijednost=''  />
-                <InputText atribut='Količina otrova' vrijednost=''  />
-                <InputText atribut='CAS broj' vrijednost=''  />                                
+                <InputText atribut='naziv' vrijednost=''  />
+                <InputText atribut='aktivnaTvar' vrijednost=''  />
+                <InputText atribut='kolicina' vrijednost=''  />
+                <InputText atribut='casBroj' vrijednost=''  />                                
                 <Akcije odustani={RoutesNames.OTROVI_PREGLED} akcija='Dodaj otrov' />
            </Form>
         </Container>

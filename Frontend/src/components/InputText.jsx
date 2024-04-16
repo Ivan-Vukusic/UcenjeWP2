@@ -7,7 +7,7 @@ export default function InputText({ atribut, vrijednost }) {
         <Form.Label className='labelaAtributa'>{atribut}</Form.Label>
         <Form.Control
             name={atribut}
-            defaultValue={vrijednost}            
+            defaultValue={vrijednost}
         />
     </Form.Group>
   );

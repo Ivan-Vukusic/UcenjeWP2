@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Card, Modal } from "react-bootstrap";
 import DjelatnikService from "../../services/DjelatnikService";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
@@ -12,9 +12,10 @@ import useLoading from "../../hooks/useLoading";
 
 export default function Djelatnici() {
 
-    const [djelatnici, setDjelatnici] = useState();    
+    const [djelatnici, setDjelatnici] = useState();
     const { prikaziError } = useError();
     const { showLoading, hideLoading } = useLoading();
+    const [prikaziModal, setPrikaziModal] = useState(false);
 
     async function dohvatiDjelatnike() {
         showLoading();
@@ -31,11 +32,18 @@ export default function Djelatnici() {
     async function obrisiDjelatnika(sifra) {
         showLoading();
         const odgovor = await DjelatnikService.obrisi('Djelatnik', sifra);
-        prikaziError(odgovor.podaci);
-        if (odgovor.ok) {
+        hideLoading();
+        if (odgovor.ok){
             dohvatiDjelatnike();
+            setPrikaziModal(true);
+        } else {
+            prikaziError(odgovor.podaci); 
         }
         hideLoading();
+    }
+
+    function zatvoriModal() {
+        setPrikaziModal(false);
     }
 
     useEffect(() => {
@@ -85,6 +93,15 @@ export default function Djelatnici() {
                 ))
                 }
             </Row>
+            <Modal show={prikaziModal} onHide={zatvoriModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Uspješno</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Djelatnik je uspješno obrisan.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={zatvoriModal}>Zatvori</Button>
+                </Modal.Footer>
+            </Modal>            
         </Container>
 
     );

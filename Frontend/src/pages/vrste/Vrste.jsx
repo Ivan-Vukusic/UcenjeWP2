@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Modal } from "react-bootstrap";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -15,6 +15,7 @@ export default function Vrste(){
     const navigate = useNavigate();
     const { prikaziError } = useError();
     const { showLoading, hideLoading } = useLoading();
+    const [prikaziModal, setPrikaziModal] = useState(false);
 
     async function dohvatiVrste(){
         showLoading();
@@ -31,11 +32,17 @@ export default function Vrste(){
     async function obrisiVrstu(sifra){
         showLoading();
         const odgovor = await VrstaService.obrisi('Vrsta', sifra);
-        prikaziError(odgovor.podaci);
+        hideLoading();        
         if (odgovor.ok){
             dohvatiVrste();
-        }
-        hideLoading();
+            setPrikaziModal(true);
+        } else {
+            prikaziError(odgovor.podaci); 
+        }        
+    }
+
+    function zatvoriModal(){
+        setPrikaziModal(false);
     }
 
     useEffect(()=>{
@@ -84,6 +91,15 @@ export default function Vrste(){
                     ))}
                 </tbody>
             </Table>
+            <Modal show={prikaziModal} onHide={zatvoriModal}> 
+                <Modal.Header closeButton>
+                    <Modal.Title>Uspješno</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vrsta objekta je uspješno obrisana.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={zatvoriModal}>Zatvori</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
 
     );

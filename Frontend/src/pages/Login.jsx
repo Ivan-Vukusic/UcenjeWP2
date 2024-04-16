@@ -31,7 +31,12 @@ export default function Login() {
         </Form.Group>
         <Form.Group controlId='lozinka'>
           <Form.Label>Lozinka</Form.Label>
-          <Form.Control type='password' name='lozinka' required />
+          <Form.Control
+            type='password'
+            name='lozinka'
+            placeholder='DobraPrava99'
+            required
+          />
         </Form.Group>
         <Button variant='primary' className='gumb pomjeri' type='submit'>
           Autoriziraj

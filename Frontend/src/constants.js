@@ -27,6 +27,6 @@ export const RoutesNames = {
 };
 
 export const App = {
-    URL: 'https://localhost:7137',
-    DEV: true
+    URL: 'https://korisnik117-001-site1.itempurl.com',
+    DEV: false
 };

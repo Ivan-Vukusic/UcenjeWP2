@@ -7,7 +7,6 @@ import ObjektService from "../../services/ObjektService";
 import OtrovService from "../../services/OtrovService";
 import { RoutesNames } from "../../constants";
 import useError from "../../hooks/useError";
-import InputText from "../../components/InputText";
 import Akcije from "../../components/Akcije";
 import useLoading from "../../hooks/useLoading";
 

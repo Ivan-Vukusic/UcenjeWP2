@@ -88,8 +88,8 @@ export default function ObjektiPromjeni() {
 
             <Form onSubmit={handleSubmit}>
 
-                <InputText atribut='Mjesto' vrijednost={objekt.mjesto} />
-                <InputText atribut='Adresa' vrijednost={objekt.adresa} />
+                <InputText atribut='mjesto' vrijednost={objekt.mjesto} />
+                <InputText atribut='adresa' vrijednost={objekt.adresa} />
 
                 <Form.Group controlId='vrsta'>
                     <Form.Label>Vrsta objekta</Form.Label>

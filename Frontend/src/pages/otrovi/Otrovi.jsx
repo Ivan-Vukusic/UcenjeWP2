@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Modal } from "react-bootstrap";
 import OtrovService from "../../services/OtrovService";
 import { GiPoisonBottle } from "react-icons/gi";
 import { FaRegEdit } from "react-icons/fa";
@@ -16,6 +16,7 @@ export default function Otrovi(){
     const navigate = useNavigate();
     const { prikaziError } = useError();
     const { showLoading, hideLoading } = useLoading();
+    const [prikaziModal, setPrikaziModal] = useState(false);
 
     async function dohvatiOtrove(){
         showLoading();
@@ -32,11 +33,17 @@ export default function Otrovi(){
     async function obrisiOtrov(sifra){
         showLoading();
         const odgovor = await OtrovService.obrisi('Otrov', sifra);
-        prikaziError(odgovor.podaci);
-        if (odgovor.ok) {
+        hideLoading();
+        if (odgovor.ok){
             dohvatiOtrove();
-        }
-        hideLoading();        
+            setPrikaziModal(true);
+        } else {
+            prikaziError(odgovor.podaci); 
+        }       
+    }
+
+    function zatvoriModal(){
+        setPrikaziModal(false);
     }
 
     useEffect(()=>{
@@ -91,6 +98,15 @@ export default function Otrovi(){
                     ))}
                 </tbody>
             </Table>
+            <Modal show={prikaziModal} onHide={zatvoriModal}> 
+                <Modal.Header closeButton>
+                    <Modal.Title>Uspješno</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Otrov je uspješno obrisan.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={zatvoriModal}>Zatvori</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
 
     );

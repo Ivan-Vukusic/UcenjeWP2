@@ -15,7 +15,7 @@ export default function VrsteDodaj(){
 
     async function dodajVrstu(vrsta){
         showLoading();
-        const odgovor = await VrstaService.dodaj('Vrsta', vrsta);
+        const odgovor = await VrstaService.dodaj('Vrsta',vrsta);
         if(odgovor.ok){
           navigate(RoutesNames.VRSTE_PREGLED);
           return
@@ -38,8 +38,10 @@ export default function VrsteDodaj(){
 
         <Container>
            <Form onSubmit={handleSubmit}>
-                <InputText atribut='Naziv vrste objekta' vrijednost='' />                
+
+                <InputText atribut='naziv' vrijednost='' />                
                 <Akcije odustani={RoutesNames.VRSTE_PREGLED} akcija='Dodaj vrstu' />
+                
            </Form>
         </Container>
 

@@ -81,7 +81,7 @@ const fixedOptions = {
     type: 'pie',
   },
   title: {
-    text: 'Obavljanje deratizacije po vrstama objekata',
+    text: 'Provedba deratizacije po vrstama objekata',
     align: 'left',
   },
   tooltip: {
