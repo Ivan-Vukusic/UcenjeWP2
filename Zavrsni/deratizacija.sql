@@ -1,29 +1,29 @@
-use master;
+--use master;
 
-go
+--go
 
-drop database if exists deratizacija;
+--drop database if exists deratizacija;
 
-go
+--go
 
-create database deratizacija collate Croatian_CI_AS;
+--create database deratizacija collate Croatian_CI_AS;
 
-go
+--go
 
-use deratizacija;
+--use deratizacija;
 
---SELECT name, collation_name FROM sys.databases;
---GO
+SELECT name, collation_name FROM sys.databases;
+GO
 
---ALTER DATABASE db_aa5999_deratizacija SET SINGLE_USER WITH
---ROLLBACK IMMEDIATE;
---GO
---ALTER DATABASE db_aa5999_deratizacija COLLATE Croatian_CI_AS;
---GO
---ALTER DATABASE db_aa5999_deratizacija SET MULTI_USER;
---GO
---SELECT name, collation_name FROM sys.databases;
---GO
+ALTER DATABASE db4262 SET SINGLE_USER WITH
+ROLLBACK IMMEDIATE;
+GO
+ALTER DATABASE db4262 COLLATE Croatian_CI_AS;
+GO
+ALTER DATABASE db4262 SET MULTI_USER;
+GO
+SELECT name, collation_name FROM sys.databases;
+GO
 
 drop table vrste;
 drop table objekti;
