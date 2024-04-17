@@ -27,6 +27,6 @@ export const RoutesNames = {
 };
 
 export const App = {
-    URL: 'https://deratizacija.runasp.net',
+    URL: 'https://localhost:7137',
     DEV: false
 };
