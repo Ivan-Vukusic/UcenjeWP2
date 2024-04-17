@@ -45,8 +45,8 @@ export default function Djelatnici() {
             setPrikaziModal(true);
         } else {
             prikaziError(odgovor.podaci);
-        }
-        hideLoading();
+            hideLoading();
+        }        
     }
 
     function zatvoriModal() {
