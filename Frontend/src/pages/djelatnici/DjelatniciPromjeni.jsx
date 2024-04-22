@@ -10,7 +10,6 @@ import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import useLoading from "../../hooks/useLoading";
 import slika2 from "../../assets/images/slika2.png"
-import { dohvatiPorukeAlert } from '../../services/httpService';
 
 export default function DjelatniciPromjeni(){
 
@@ -56,7 +55,7 @@ export default function DjelatniciPromjeni(){
             navigate(RoutesNames.DJELATNICI_PREGLED);                       
             return;
           }
-          alert(dohvatiPorukeAlert(odgovor.podaci));
+          prikaziError(odgovor.podaci);
           hideLoading();          
       }
 

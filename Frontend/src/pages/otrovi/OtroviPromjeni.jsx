@@ -40,7 +40,7 @@ export default function OtroviPromjeni(){
             navigate(RoutesNames.OTROVI_PREGLED);                       
             return;
           }
-          alert(dohvatiPorukeAlert(odgovor.podaci));
+          prikaziError(odgovor.podaci);
           hideLoading();          
     }
 
