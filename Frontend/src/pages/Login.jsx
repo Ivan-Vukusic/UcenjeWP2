@@ -23,8 +23,7 @@ export default function Login() {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type='text'
-            name='email'
-            placeholder='ivan.vukusic@yahoo.com'
+            name='email'            
             maxLength={255}
             required
           />
@@ -33,8 +32,7 @@ export default function Login() {
           <Form.Label>Lozinka</Form.Label>
           <Form.Control
             type='password'
-            name='lozinka'
-            placeholder='DobraPrava99'
+            name='lozinka'            
             required
           />
         </Form.Group>
